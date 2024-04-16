@@ -142,6 +142,7 @@ class ProductoForm extends Form
         }
 
         $this->marca_id = ($this->marca_id == false) ? null : $this->marca_id;
+        $this->impuesto_orden = ($this->impuesto_orden == false) ? 0 : $this->impuesto_orden;
         (isset($this->producto)) ? $this->updat() : $this->producto = Producto::create($this->all());
 
         if ($imagen)
