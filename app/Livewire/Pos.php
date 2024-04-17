@@ -65,7 +65,9 @@ class Pos extends Component
     public $configuracion;
     public $bclienteoculto = '', $bcliente = '';
     public $posventa_id_eliminar;
-    public $buscar_producto,$simpresora;
+    public $gasto_id_eliminar;
+    public $buscar_producto;
+    public $simpresora='POS';
 
 
     public function descargar_venta_pdf(Posventa $posventa)
@@ -335,6 +337,12 @@ class Pos extends Component
         $this->dispatch('advertencia_eliminar_venta');
     }
 
+    public function eliminar_gasto(Gasto $gasto_id)
+    {
+        $this->gasto_id_eliminar = $gasto_id;
+        $this->dispatch('advertencia_eliminar_gasto');
+    }
+
     #[On('eliminar_pos_venta')]
     public function eliminar_pos_venta($password_id)
     {
@@ -380,6 +388,26 @@ class Pos extends Component
                 'importe' => $posventadetalle->producto_importe,
                 'tipo' => $posventadetalle->producto_tipo];
         }
+        $this->dispatch('cerrar_modal_reporte_caja');
+    }
+
+    #[On('eliminar_gasto_venta')]
+    public function eliminar_gasto_venta($password_id)
+    {
+        $autorizacion = $this->verificarAutorizacion($password_id);
+        if ($autorizacion == false) {
+            $this->dispatch('mensaje_error_autorización');
+        }
+
+        if ($this->gasto_id_eliminar->m_caja->tmovimiento_caja_id == 2) {
+            $this->gasto_id_eliminar->m_caja->caja->monto += $this->gasto_id_eliminar->m_caja->monto;
+            $this->gasto_id_eliminar->m_caja->caja->save();
+        }
+
+        $this->gasto_id_eliminar->m_caja->delete();
+        $this->gasto_id_eliminar->delete();
+
+        $this->gasto_id_eliminar->delete();
         $this->dispatch('cerrar_modal_reporte_caja');
     }
 

@@ -369,6 +369,33 @@
             })()
         })
 
+        $wire.on('advertencia_eliminar_gasto', () => {
+
+            (async () => {
+                const {
+                    value: password
+                } = await Swal.fire({
+                    title: "Enter your password",
+                    input: "password",
+                    inputAttributes: {
+                        autocapitalize: "off"
+                    },
+                    inputLabel: "Password",
+                    inputPlaceholder: "Enter your password",
+                    inputAttributes: {
+                        maxlength: "10",
+                        autocapitalize: "off",
+                        autocorrect: "off"
+                    }
+                });
+                if (password) {
+                    @this.dispatch('eliminar_gasto_venta', {
+                        password_id: password
+                    });
+                }
+            })()
+            })
+
         $wire.on('mensaje_error_autorización', () => {
                 Swal.fire({
                 position: 'center',
@@ -378,6 +405,7 @@
                 timer: 2400
                 })
             })
+
 
         $wire.on('advertencia_almacen', () => {
             Swal.fire({

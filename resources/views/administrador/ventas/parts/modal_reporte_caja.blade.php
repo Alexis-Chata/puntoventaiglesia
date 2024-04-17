@@ -67,6 +67,10 @@
                                                     <input wire:click="eliminar_venta('{{ $mcaja->m_cajable_id }}')"
                                                         wire:loading.attr="disabled" class="btn btn-danger" type="button"
                                                         id="Eliminar_venta-{{$mcaja->id}}" value="Eliminar venta">
+                                                @elseif($mcaja->tmovimiento_caja_id == 2)
+                                                <input wire:click="eliminar_gasto('{{ $mcaja->m_cajable_id }}')"
+                                                wire:loading.attr="disabled" class="btn btn-danger" type="button"
+                                                id="Eliminar_gasto-{{$mcaja->id}}" value="Eliminar gasto">
                                                 @endif
                                             </td>
                                         </tr>
