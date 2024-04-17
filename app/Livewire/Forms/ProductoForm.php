@@ -181,12 +181,14 @@ class ProductoForm extends Form
         $this->verificar_productos();
     }
 
-    public function reiniciar_productos_compuesto() {
+    public function reiniciar_productos_compuesto()
+     {
         $this->reset('productos_compuesto');
         $this->productos_compuesto_total = 0;
     }
 
-    public function eliminar_item_producto_compuesto($item_id){
+    public function eliminar_item_producto_compuesto($item_id)
+    {
         unset($this->productos_compuesto[$item_id]);
     }
 

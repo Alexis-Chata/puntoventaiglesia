@@ -9,6 +9,7 @@ use App\Models\Devolucion;
 use App\Models\Gasto;
 use App\Models\PagoCompra;
 use App\Models\Posventa;
+use App\Models\PosventaDetalle;
 use DateTime;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
@@ -33,6 +34,12 @@ class ReporteGananciasPerdidas extends Component
         $monto_compras = PagoCompra::query();
         $monto_devoluciones = Devolucion::query();
         $monto_gastos = Gasto::query();
+        $monto_com_by_vent = PosventaDetalle::query()->whereExists(function ($query)  {
+            $query->select()
+                  ->from(DB::raw('posventas'))
+                  ->whereColumn('posventa_detalles.posventa_id', 'posventas.id')
+                  ->where('posventas.estado_posventa','<>','eliminado');
+        });
 
         $monto_ventas->when($this->salmacen <> '',function ($q) {
             return $q->where('almacen_id',$this->salmacen);
@@ -47,6 +54,15 @@ class ReporteGananciasPerdidas extends Component
             });
         });
 
+        $monto_com_by_vent->when($this->salmacen <> '',function ($q) {
+            return $q->whereExists(function ($query)  {
+                $query->select()
+                      ->from(DB::raw('posventas'))
+                      ->whereColumn('posventa_detalles.posventa_id', 'posventas.id')
+                      ->where('posventas.almacen_id',$this->salmacen);
+            });
+        });
+
         $monto_devoluciones->when($this->salmacen <> '',function ($q) {
             return $q->where('almacen_id',$this->salmacen);
         });
@@ -55,6 +71,7 @@ class ReporteGananciasPerdidas extends Component
             return $q->where('almacen_id',$this->salmacen);
         });
 
+        $monto_com_by_vent =  $monto_com_by_vent->where('created_at','>=',$this->fecha_inicial." 00:00:00")->where('created_at','<=',$this->fecha_final." 23:59:59")->sum('producto_costo_compra');
         $monto_ventas =  $monto_ventas->where('created_at','>=',$this->fecha_inicial." 00:00:00")->where('created_at','<=',$this->fecha_final." 23:59:59")->sum('monto_pago');
         $monto_compras = $monto_compras->where('created_at','>=',$this->fecha_inicial." 00:00:00")->where('created_at','<=',$this->fecha_final." 23:59:59")->sum('monto_pago');
         $monto_gastos = $monto_gastos->where('created_at','>=',$this->fecha_inicial." 00:00:00")->where('created_at','<=',$this->fecha_final." 23:59:59")->sum('monto');
@@ -62,6 +79,6 @@ class ReporteGananciasPerdidas extends Component
         $monto_deuda = Cliente::whereNotNull('deuda_total')->where('deuda_total','>',0)->sum('deuda_total');
         $almacens = Almacen::all();
         $configuracion = Configuracion::find(1);
-        return view('livewire.reporte-ganancias-perdidas',compact('almacens','configuracion','monto_ventas','monto_compras','monto_gastos','monto_devoluciones','monto_deuda'));
+        return view('livewire.reporte-ganancias-perdidas',compact('monto_com_by_vent','almacens','configuracion','monto_ventas','monto_compras','monto_gastos','monto_devoluciones','monto_deuda'));
     }
 }

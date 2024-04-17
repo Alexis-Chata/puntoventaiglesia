@@ -314,6 +314,8 @@ class Pos extends Component
             $item->cantidad = $cantidad;
             $item->importe_previo =  $item->precio*$item->cantidad;
             $item->descuento = 0;
+            $item->compra = $producto->costo;
+            $item->costo_compra = $producto->costo*$cantidad;
             $item->importe =  $item->importe_previo-$item->descuento;
             $item->tipo = $producto->tipo;
             $this->items[$item->codigo] = $item->toArray();
@@ -369,10 +371,12 @@ class Pos extends Component
                 'id' => $posventadetalle->id,
                 'codigo' => $posventadetalle->producto_codigo,
                 'designacion' => $posventadetalle->producto_nombre,
+                'compra' => $posventadetalle->producto_compra,
                 'precio' => $posventadetalle->producto_precio,
                 'importe_previo' => $posventadetalle->producto_importe_previo,
                 'descuento' => $posventadetalle->producto_descuento,
                 'cantidad' => $posventadetalle->producto_cantidad,
+                'costo_compra' => $posventadetalle->producto_costo_compra,
                 'importe' => $posventadetalle->producto_importe,
                 'tipo' => $posventadetalle->producto_tipo];
         }
@@ -437,6 +441,7 @@ class Pos extends Component
                 }
                 $this->items[$key]['cantidad'] = empty($this->items[$key]['cantidad']) ? 1 : $this->items[$key]['cantidad'];
                 $this->items[$key]['descuento'] = empty($this->items[$key]['descuento']) ? 0 : $this->items[$key]['descuento'];
+                $this->items[$key]['costo_compra'] = $this->items[$key]['compra'] * $this->items[$key]['cantidad'];
                 $this->items[$key]['importe_previo'] = $this->items[$key]['precio'] * $this->items[$key]['cantidad'];
                 $this->items[$key]['importe'] =  $this->items[$key]['importe_previo'] - $this->items[$key]['descuento'];
             }
@@ -502,8 +507,10 @@ class Pos extends Component
                 $posventa_detalle->producto_id = $item['id'];
                 $posventa_detalle->producto_codigo = $item['codigo'];
                 $posventa_detalle->producto_nombre = $item['designacion'];
+                $posventa_detalle->producto_compra = $item['compra'];
                 $posventa_detalle->producto_precio = $item['precio'];
                 $posventa_detalle->producto_cantidad = $item['cantidad'];
+                $posventa_detalle->producto_costo_compra = $item['costo_compra'];
                 $posventa_detalle->producto_importe_previo = $item['importe_previo'];
                 $posventa_detalle->producto_descuento = $item['descuento'];
                 $posventa_detalle->producto_precio = $item['precio'];

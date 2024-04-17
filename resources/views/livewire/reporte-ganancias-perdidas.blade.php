@@ -1,4 +1,5 @@
 <div>
+
     <div class="row">
         <div class="col-sm-6 col-12 mb-3">
             <label for="">Elegir Almacen</label>
@@ -16,6 +17,55 @@
         <div class="col-12 col-sm-3 mb-3" >
             <label for="fecha_final">Fecha Final</label>
             <input type="date" class="form-control" wire:model.live='fecha_final'  id="fecha_final">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 fs-3">
+            <b>Reporte Ganacias<hr></b>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 mt-2 mb-1">
+            <div class="row g-4">
+                <div class="col-12 col-sm-6 col-xl-4" role="button" data-bs-toggle="modal">
+                    <div class="d-flex justify-content-center align-items-center p-4 rounded-3" style="background-color: white;box-shadow: 2.5px 2.5px 2.5px rgba(0, 0, 0, 0.3);">
+                        <span class="display-6 lh-1 text-blue mb-0"><i style="color:black;" class="fas fa-shopping-cart"></i></span>
+                        <div class="ms-4 h6 fw-normal mb-0">
+                            <div class="d-flex">
+                                <h5 class="purecounter mb-0 fw-bold">Total de Ventas</h5>
+                            </div>
+                            <p class="mb-0">{{$configuracion->moneda->simbolo}} {{$monto_ventas}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6 col-xl-4" role="button" data-bs-toggle="modal">
+                    <div class="d-flex justify-content-center align-items-center p-4  rounded-3" style="background-color: white;box-shadow: 2.5px 2.5px 2.5px rgba(0, 0, 0, 0.3);">
+                        <span class="display-6 lh-1 text-blue mb-0"><i style="color:black;" class="fas fa-list"></i></span>
+                        <div class="ms-4 h6 fw-normal mb-0">
+                            <div class="d-flex">
+                                <h5 class="purecounter mb-0 fw-bold">Total de Costos</h5>
+                            </div>
+                            <p class="mb-0">{{$configuracion->moneda->simbolo}} {{$monto_com_by_vent}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6 col-xl-4" role="button" data-bs-toggle="modal">
+                    <div class="d-flex justify-content-center align-items-center p-4  rounded-3" style="background-color: white;box-shadow: 2.5px 2.5px 2.5px rgba(0, 0, 0, 0.3);">
+                        <span class="display-6 lh-1 text-blue mb-0"><i style="color:black;" class="fas fa-list"></i></span>
+                        <div class="ms-4 h6 fw-normal mb-0">
+                            <div class="d-flex">
+                                <h5 class="purecounter mb-0 fw-bold">Ganacia Neta</h5>
+                            </div>
+                            <p class="mb-0">{{$configuracion->moneda->simbolo}} {{$monto_ventas-$monto_com_by_vent}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 fs-3">
+            <b>Reporte General<hr></b>
         </div>
     </div>
     <div class="row">
