@@ -67,7 +67,7 @@ class Pos extends Component
     public $posventa_id_eliminar;
     public $gasto_id_eliminar;
     public $buscar_producto;
-    public $simpresora='POS';
+    public $simpresora='';
 
 
     public function descargar_venta_pdf(Posventa $posventa)
