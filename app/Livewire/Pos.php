@@ -350,45 +350,48 @@ class Pos extends Component
         if ($autorizacion == false) {
             $this->dispatch('mensaje_error_autorización');
         }
-        $this->posventa_id_eliminar->estado_posventa = 'eliminado';
-        $this->posventa_id_eliminar->save();
-        if ($this->posventa_id_eliminar->m_caja->tmovimiento_caja_id == 3) {
-            $this->posventa_id_eliminar->m_caja->caja->monto -= $this->posventa_id_eliminar->m_caja->monto;
-            $this->posventa_id_eliminar->m_caja->caja->save();
-        }
-        $this->posventa_id_eliminar->m_caja->delete();
-        $this->posventa_id_eliminar->delete();
-        $this->almacen_id = $this->posventa_id_eliminar->almacen_id;
-        $this->bclienteoculto = $this->posventa_id_eliminar->cliente_id;
-        $this->impuesto_porcentaje = $this->posventa_id_eliminar->impuesto_porcentaje;
-        $this->impuesto_monto = $this->posventa_id_eliminar->impuesto_monto;
-        $this->descuento = $this->posventa_id_eliminar->descuento;
-        $this->envio = $this->posventa_id_eliminar->envio;
-        $this->total_pagar = $this->posventa_id_eliminar->total_pagar;
-        $this->cantidad_recibida = $this->posventa_id_eliminar->cantidad_recibida;
-        $this->monto_pago = $this->posventa_id_eliminar->monto_pago;
-        $this->cambio = $this->posventa_id_eliminar->cambio;
-        $this->nota_venta = $this->posventa_id_eliminar->nota_venta;
-        $this->nota_pago = $this->posventa_id_eliminar->nota_pago;
-        $this->items = [];
-        foreach ($this->posventa_id_eliminar->posventadetalles as $posventadetalle)
+        else
         {
-            $this->productoform->actualizar_stock_producto($posventadetalle->producto_id, $this->posventa_id_eliminar->almacen_id, '+', $posventadetalle->producto_cantidad);
-            $this->items[$posventadetalle->producto_codigo] =
-                [
-                'id' => $posventadetalle->id,
-                'codigo' => $posventadetalle->producto_codigo,
-                'designacion' => $posventadetalle->producto_nombre,
-                'compra' => $posventadetalle->producto_compra,
-                'precio' => $posventadetalle->producto_precio,
-                'importe_previo' => $posventadetalle->producto_importe_previo,
-                'descuento' => $posventadetalle->producto_descuento,
-                'cantidad' => $posventadetalle->producto_cantidad,
-                'costo_compra' => $posventadetalle->producto_costo_compra,
-                'importe' => $posventadetalle->producto_importe,
-                'tipo' => $posventadetalle->producto_tipo];
+            $this->posventa_id_eliminar->estado_posventa = 'eliminado';
+            $this->posventa_id_eliminar->save();
+            if ($this->posventa_id_eliminar->m_caja->tmovimiento_caja_id == 3) {
+                $this->posventa_id_eliminar->m_caja->caja->monto -= $this->posventa_id_eliminar->m_caja->monto;
+                $this->posventa_id_eliminar->m_caja->caja->save();
+            }
+            $this->posventa_id_eliminar->m_caja->delete();
+            $this->posventa_id_eliminar->delete();
+            $this->almacen_id = $this->posventa_id_eliminar->almacen_id;
+            $this->bclienteoculto = $this->posventa_id_eliminar->cliente_id;
+            $this->impuesto_porcentaje = $this->posventa_id_eliminar->impuesto_porcentaje;
+            $this->impuesto_monto = $this->posventa_id_eliminar->impuesto_monto;
+            $this->descuento = $this->posventa_id_eliminar->descuento;
+            $this->envio = $this->posventa_id_eliminar->envio;
+            $this->total_pagar = $this->posventa_id_eliminar->total_pagar;
+            $this->cantidad_recibida = $this->posventa_id_eliminar->cantidad_recibida;
+            $this->monto_pago = $this->posventa_id_eliminar->monto_pago;
+            $this->cambio = $this->posventa_id_eliminar->cambio;
+            $this->nota_venta = $this->posventa_id_eliminar->nota_venta;
+            $this->nota_pago = $this->posventa_id_eliminar->nota_pago;
+            $this->items = [];
+            foreach ($this->posventa_id_eliminar->posventadetalles as $posventadetalle)
+            {
+                $this->productoform->actualizar_stock_producto($posventadetalle->producto_id, $this->posventa_id_eliminar->almacen_id, '+', $posventadetalle->producto_cantidad);
+                $this->items[$posventadetalle->producto_codigo] =
+                    [
+                    'id' => $posventadetalle->id,
+                    'codigo' => $posventadetalle->producto_codigo,
+                    'designacion' => $posventadetalle->producto_nombre,
+                    'compra' => $posventadetalle->producto_compra,
+                    'precio' => $posventadetalle->producto_precio,
+                    'importe_previo' => $posventadetalle->producto_importe_previo,
+                    'descuento' => $posventadetalle->producto_descuento,
+                    'cantidad' => $posventadetalle->producto_cantidad,
+                    'costo_compra' => $posventadetalle->producto_costo_compra,
+                    'importe' => $posventadetalle->producto_importe,
+                    'tipo' => $posventadetalle->producto_tipo];
+            }
+            $this->dispatch('cerrar_modal_reporte_caja');
         }
-        $this->dispatch('cerrar_modal_reporte_caja');
     }
 
     #[On('eliminar_gasto_venta')]
