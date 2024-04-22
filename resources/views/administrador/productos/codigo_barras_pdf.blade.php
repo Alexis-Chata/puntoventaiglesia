@@ -27,11 +27,8 @@
 
 
         .barcodea4 {
-            border: 1px solid #ccc;
             display: block;
-            margin: 10px auto;
             page-break-after: always;
-
             height: 11.6in;
             padding: 0.1in 0 0 0.1in;
             width: 8.25in;
@@ -45,9 +42,7 @@
 
         .barcode_non_a4,
         .barcodea4 {
-            border: 1px solid #ccc;
             display: block;
-            margin: 10px auto;
             page-break-after: always;
         }
 
@@ -171,7 +166,7 @@
                         <div class="{{ $barcode_style }}">
                             <div class="head_barcode text-left" style="padding-left: 10px; font-weight: bold;">
                                 <span class="barcode-name">{{ $lista_productos[$tey]['nombre'] }}</span>
-                                <span class="barcode-price">S/ {{ $lista_productos[$tey]['precio'] }}</span>
+                                <span class="barcode-price">{{ $configuracion->moneda->simbolo }} {{ $lista_productos[$tey]['precio'] }}</span>
                             </div>
                             <div textmargin="0" fontoptions="bold" class="barcode">
                                 <center> {!! DNS1D::getBarcodeHTML($tey, $lista_productos[$tey]['simbologia'], 1, 37) !!}</center>
@@ -185,8 +180,4 @@
         </div>
     </div>
 </body>
-<script>
-    window.print();
-</script>
-
 </html>
