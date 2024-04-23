@@ -16,7 +16,7 @@ class ImprimirCodigo extends Component
     public $iteration;
     public $buscar_producto_oculto;
     public $stipo_papel;
-    public $barcode,$barcode_style;
+    public $barcode,$barcode_style,$barcode_style_pdf;
     public $lista_productos = [];
 
     public function mount(){
@@ -27,34 +27,42 @@ class ImprimirCodigo extends Component
         if ($this->stipo_papel == 1) {
             $this->barcode = 'barcodea4';
             $this->barcode_style = 'barcode-item style40';
+            $this->barcode_style_pdf = 'style40';
         }
         elseif ($this->stipo_papel == 2) {
             $this->barcode = 'barcode_non_a4';
             $this->barcode_style = 'barcode-item style30';
+            $this->barcode_style_pdf = 'style30';
         }
         elseif ($this->stipo_papel == 3) {
             $this->barcode = 'barcodea4';
             $this->barcode_style = 'barcode-item style24';
+            $this->barcode_style_pdf = 'style24';
         }
         elseif ($this->stipo_papel == 4) {
             $this->barcode = 'barcode_non_a4';
             $this->barcode_style = 'barcode-item style20';
+            $this->barcode_style_pdf = 'style20';
         }
         elseif ($this->stipo_papel == 5) {
             $this->barcode = 'barcodea4';
             $this->barcode_style = 'barcode-item style18';
+            $this->barcode_style_pdf = 'style18';
         }
         elseif ($this->stipo_papel == 6) {
             $this->barcode = 'barcode_non_a4';
             $this->barcode_style = 'barcode-item style14';
+            $this->barcode_style_pdf = 'style14';
         }
         elseif ($this->stipo_papel == 7) {
             $this->barcode = 'barcodea4';
             $this->barcode_style = 'barcode-item style12';
+            $this->barcode_style_pdf = 'style12';
         }
         elseif ($this->stipo_papel == 8) {
             $this->barcode = 'barcode_non_a4';
             $this->barcode_style = 'barcode-item style10';
+            $this->barcode_style_pdf = 'style10';
         }
         else {
             $this->stipo_papel = "";
@@ -91,10 +99,11 @@ class ImprimirCodigo extends Component
         $nombre_archivo = 'lista-codigo-barra'.date("F j, Y, g:i a").'.pdf';
         $barcode = $this->barcode;
         $barcode_style = $this->barcode_style;
+        $barcode_style_pdf = $this->barcode_style_pdf;
         $lista_productos = $this->lista_productos;
         $configuracion = $this->configuracion;
         $consultapdf = FacadePdf::loadView('administrador.productos.codigo_barras_pdf3',
-        compact('configuracion','barcode','barcode_style','lista_productos'))
+        compact('configuracion','barcode','barcode_style','lista_productos','barcode_style_pdf'))
         ->setPaper('a4');
 
         $pdfContent = $consultapdf->output();
