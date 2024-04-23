@@ -96,10 +96,13 @@
                             <div class="{{$barcode_style}}">
                                 <div class="head_barcode text-left" style="padding-left: 10px; font-weight: bold;">
                                     <span class="barcode-name">{{$lista_productos[$tey]['nombre']}}</span>
-                                    <span class="barcode-price">S/ {{$lista_productos[$tey]['precio']}}</span>
+                                    <span class="barcode-price">{{ $configuracion->moneda->simbolo }} {{$lista_productos[$tey]['precio']}}</span>
                                 </div>
                                 <div textmargin="0" fontoptions="bold" class="barcode">
                                    <center> {!! DNS1D::getBarcodeHTML($tey,$lista_productos[$tey]['simbologia'],1,37) !!}</center>
+                                </div>
+                                <div style="font-weight: bold;text-align: center;">
+                                    <span class="barcode-name">{{ $tey }}</span>
                                 </div>
                             </div>
                         @endfor
