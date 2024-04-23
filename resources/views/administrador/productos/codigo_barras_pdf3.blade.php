@@ -174,6 +174,9 @@ Copy code
                                      {!! DNS1D::getBarcodeHTML($tey, $lista_productos[$tey]['simbologia'], 1, 37) !!}
                                 </div>
                                 </center>
+                                <div style="font-weight: bold;text-align: center;">
+                                    <span class="barcode-name">{{ $tey }}</span><
+                                </div>
                             </div>
                         @if ($p%$separador == 0)
                             <div class="clear"></div>
