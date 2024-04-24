@@ -255,7 +255,7 @@
                                 <div class="col-6 col-sm-6 col-md-4 col-lg-4 col-xl-4 col-xxl-3 my-2" role="button" wire:key="{{ $product->producto->id }}"
                                     wire:click="agregaritem('{{ $product->producto->id }}')">
                                     <div class="card">
-                                        <img src="{{ asset($product->producto->imagen) }}" style="object-fit: cover;"
+                                        <img src="{{ asset($product->producto->imagen) }}" style="object-fit: contain;"
                                             height="80px;" class="card-img-top" alt="...">
                                         <div class="card-body">
                                             <div class="row">
