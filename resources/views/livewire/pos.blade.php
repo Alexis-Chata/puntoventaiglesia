@@ -11,6 +11,17 @@
                         </div>
                         <div class="row col-auto align-items-center">
                             <div class="col-auto" style="vertical-align: middle;">
+                                @if ($cajero->modo == 1)
+                                <button role="button" class="btn btn-secondary" wire:loading.attr="disabled" wire:target="cambiar_modo_usuario" wire:click='cambiar_modo_usuario'>
+                                    <i class="bi bi-laptop" id="modo_laptop" ></i>
+                                </button>
+                                @elseif($cajero->modo == 2)
+                                <button role="button" class="btn btn-secondary" wire:loading.attr="disabled" wire:target="cambiar_modo_usuario"  wire:click='cambiar_modo_usuario'>
+                                    <i class="bi bi-tablet" id="modo_tablet"></i>
+                                </button>
+                                @endif
+                            </div>
+                            <div class="col-auto" style="vertical-align: middle;">
                                 <button role="button" class="btn btn-info" data-bs-toggle="modal"
                                     data-bs-target="#modalReporteCaja"><i class="bi bi-book-fill"></i></button>
                             </div>

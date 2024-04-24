@@ -96,10 +96,10 @@
                                             <td>{{$comprasform->detalle_compra[$key]['stock_actual']}}</td>
                                             @if ($configuracion->farmacia == 1)
                                             @php $valor_fecha = 'comprasform.detalle_compra.'.$key.'.fecha_vencimiento_producto';@endphp
-                                            <td><input type="date" id="fecha_vencimiento_producto_{{$key}}" class="form-control"  wire:model.live='{{$valor_fecha}}' wire:click="actualizar_item_compra('{{$key}}')"></td>
+                                            <td><input type="date" id="fecha_vencimiento_producto_{{$key}}" class="form-control"  wire:model.live.debounce.500ms='{{$valor_fecha}}' wire:click="actualizar_item_compra('{{$key}}')"></td>
                                             @endif
                                             @php $valor_cantidad = 'comprasform.detalle_compra.'.$key.'.cantidad';@endphp
-                                            <td><input type="number" id="input_cantidad_{{$key}}" class="form-control"  min="1" wire:model.live='{{$valor_cantidad}}' wire:click="actualizar_item_compra('{{$key}}')"></td>
+                                            <td><input type="number" id="input_cantidad_{{$key}}" class="form-control"  min="1" wire:model.live.debounce.500ms='{{$valor_cantidad}}' wire:click="actualizar_item_compra('{{$key}}')"></td>
                                             <td>{{$comprasform->detalle_compra[$key]['descuento']}}</td>
                                             <td>{{$comprasform->detalle_compra[$key]['impuesto']}}</td>
                                             <td>{{number_format($comprasform->detalle_compra[$key]['total_parcial'],2)}}</td>
@@ -162,6 +162,12 @@
                                                 <option value="unidad">Unidad</option>
                                                 <option value="kg">Kg</option>
                                             </select>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <label for="item_precio_producto">Precio del Venta <span style="color:red;">*</span></label>
+                                            <input id="item_precio_producto" wire:model='item_precio_producto' class="form-control" type="number" step="0.01">
                                         </td>
                                     </tr>
                                     <tr>

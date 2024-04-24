@@ -471,6 +471,7 @@ class ComprasForm extends Form
         $this->detalle_compra[$producto->codigo]['metodo_impuesto'] = 'exclusivo';
         $this->detalle_compra[$producto->codigo]['impuesto_orden'] = $producto->impuesto_orden;
         $this->detalle_compra[$producto->codigo]['costo'] = $producto->costo;
+        $this->detalle_compra[$producto->codigo]['precio'] = $producto->precio;
         $this->detalle_compra[$producto->codigo]['compra_unidad'] = 'unidad';
         $this->detalle_compra[$producto->codigo]['descuento_unitario'] = 0;
         $this->detalle_compra[$producto->codigo]['nombre_producto'] = $producto->designacion;
@@ -493,7 +494,7 @@ class ComprasForm extends Form
     public function actualizar_item
     (
         $item_id,$item_costo_producto,$item_metodo_impuesto,$item_impuesto_orden,$item_metodo_descuento,$item_descuento,$item_compra_unidad,
-        $item_cantidad,$item_nombre_producto,$item_producto_id
+        $item_cantidad,$item_nombre_producto,$item_producto_id,$item_precio_producto
     )
     {
         $this->detalle_compra[$item_id]['producto_id']        = $item_producto_id;
@@ -501,6 +502,7 @@ class ComprasForm extends Form
         $this->detalle_compra[$item_id]['metodo_impuesto']    = $item_metodo_impuesto;
         $this->detalle_compra[$item_id]['impuesto_orden']     = $item_impuesto_orden ? $item_impuesto_orden : 0;
         $this->detalle_compra[$item_id]['costo']              = $item_costo_producto ? $item_costo_producto : 1;
+        $this->detalle_compra[$item_id]['precio']              = $item_precio_producto ? $item_precio_producto : 1;
         $this->detalle_compra[$item_id]['compra_unidad']      = $item_compra_unidad;
         $this->detalle_compra[$item_id]['descuento_unitario'] = $item_descuento ? $item_descuento : 0;
         $this->detalle_compra[$item_id]['nombre_producto'] = $item_nombre_producto;

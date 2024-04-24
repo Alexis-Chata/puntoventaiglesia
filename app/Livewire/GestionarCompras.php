@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use App\Exports\ReporteComprasExport;
 use App\Livewire\Forms\ComprasForm;
+use App\Livewire\Forms\ProductoForm;
 use App\Livewire\Forms\PagoCompraForm;
 use App\Models\Almacen;
 use App\Models\Compra;
@@ -22,6 +23,7 @@ class GestionarCompras extends Component
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
     public ComprasForm $comprasform;
+    public ProductoForm $productoform;
     public PagoCompraForm $pagocompraform;
     public $search = '';
     public $titlemodal = 'Añadir';
@@ -40,7 +42,7 @@ class GestionarCompras extends Component
     public $configuracion;
     public $finicio,$ffinal,$salmacen;
     #editar item
-    public $item_costo_producto,$item_metodo_impuesto,$item_impuesto_orden,$item_metodo_descuento,$item_descuento,$item_compra_unidad,$item_producto_id;
+    public $item_precio_producto,$item_costo_producto,$item_metodo_impuesto,$item_impuesto_orden,$item_metodo_descuento,$item_descuento,$item_compra_unidad,$item_producto_id;
     public $item_cantidad,$item_nombre_producto;
     public function mount(){  $this->configuracion = Configuracion::find(1); }
 
@@ -61,6 +63,7 @@ class GestionarCompras extends Component
     {
         $this->editar_item_id = $item_id;
         $this->item_costo_producto   = $this->comprasform->detalle_compra[$item_id]['costo'];
+        $this->item_precio_producto   = $this->comprasform->detalle_compra[$item_id]['precio'];
         $this->item_metodo_impuesto  = $this->comprasform->detalle_compra[$item_id]['metodo_impuesto'];
         $this->item_impuesto_orden   = $this->comprasform->detalle_compra[$item_id]['impuesto_orden'];
         $this->item_metodo_descuento = $this->comprasform->detalle_compra[$item_id]['metodo_descuento'];
@@ -78,7 +81,8 @@ class GestionarCompras extends Component
             $this->item_compra_unidad,
             $this->item_cantidad,
             $this->item_nombre_producto,
-            $this->item_producto_id
+            $this->item_producto_id,
+            $this->item_precio_producto
         );
         $this->editar_item = false;
     }
@@ -97,6 +101,7 @@ class GestionarCompras extends Component
         $this->editar_item = true;
         $this->editar_item_id = $item_id;
         $this->item_costo_producto   = $this->comprasform->detalle_compra[$item_id]['costo'];
+        $this->item_precio_producto   = $this->comprasform->detalle_compra[$item_id]['precio'];
         $this->item_metodo_impuesto  = $this->comprasform->detalle_compra[$item_id]['metodo_impuesto'];
         $this->item_impuesto_orden   = $this->comprasform->detalle_compra[$item_id]['impuesto_orden'];
         $this->item_metodo_descuento = $this->comprasform->detalle_compra[$item_id]['metodo_descuento'];
@@ -118,10 +123,16 @@ class GestionarCompras extends Component
             $this->item_compra_unidad,
             $this->item_cantidad,
             $this->item_nombre_producto,
-            $this->item_producto_id
+            $this->item_producto_id,
+            $this->item_precio_producto,
         );
         $this->editar_item = false;
+        $bproducto = Producto::find($this->item_producto_id);
+        $this->productoform->actualizar_costo_producto($bproducto,$this->item_costo_producto);
+        $this->productoform->actualizar_precio_producto($bproducto,$this->item_precio_producto);
     }
+
+
 
     public function updatedBuscarProductoOculto()
     {

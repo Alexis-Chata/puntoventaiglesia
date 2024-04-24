@@ -22,7 +22,7 @@ class PosVentaForm extends Form
 
     public function descargar_reporte_ventas_pdf($posventas){
         $configuracion = Configuracion::find(1);
-        $nombre_archivo = 'ReporteDeVentas-' . date("F j, Y, g:i a") . '.pdf';
+        $nombre_archivo = 'ReporteDeVentas-' . date("Y-m-d H:i:s") . '.pdf';
         $consultapdf = FacadePdf::loadView('administrador.ventas.reporte_ventas_pdf', compact('posventas', 'configuracion'))->setPaper('a4', 'landscape');
         $pdfContent = $consultapdf->output();
         return response()->streamDownload(
@@ -84,7 +84,7 @@ class PosVentaForm extends Form
             }
 
             $configuracion = Configuracion::find(1);
-            $nombre_archivo = 'comprobante-' . date("F j, Y, g:i a") . '.pdf';
+            $nombre_archivo = 'comprobante-' . date("Y-m-d H:i:s") . '.pdf';
             $consultapdf = FacadePdf::loadView('administrador.pdf.comprobante', compact('posventa', 'configuracion'))->setPaper([0, 0, 215.25, $paper_heigth + $items_adicional * 2 * ($posventa->posventadetalles->count())]);
             $pdfContent = $consultapdf->output();
             return response()->streamDownload(

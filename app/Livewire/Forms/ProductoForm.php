@@ -100,6 +100,16 @@ class ProductoForm extends Form
         }
     }
 
+    public function actualizar_costo_producto(Producto $producto,$costo_producto){
+            $producto->costo = $costo_producto;
+            $producto->save();
+    }
+
+    public function actualizar_precio_producto(Producto $producto,$precio_producto){
+        $producto->precio = $precio_producto;
+        $producto->save();
+}
+
     public function updat()
     {
 

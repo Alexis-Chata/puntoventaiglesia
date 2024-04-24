@@ -69,6 +69,21 @@ class Pos extends Component
     public $buscar_producto;
     public $simpresora='';
 
+    public function cambiar_modo_usuario()
+    {
+        $user = User::find($this->cajero->id);
+        if ( $user->modo == 1)
+        {
+            $user->modo = 2;
+            $user->save();
+        }
+        elseif( $user->modo == 2)
+        {
+            $user->modo = 1;
+            $user->save();
+        }
+        $this->mount();
+    }
 
     public function descargar_venta_pdf(Posventa $posventa)
     {
@@ -176,19 +191,25 @@ class Pos extends Component
     public function updatedImpuestoPorcentaje()
     {
         $this->actualizar_montos();
+        if ($this->cajero->modo == 1) {
         $this->dispatch('dirigir_cursor');
+        }
     }
 
     public function updatedDescuento()
     {
         $this->actualizar_montos();
+        if ($this->cajero->modo == 1) {
         $this->dispatch('dirigir_cursor');
+        }
     }
 
     public function updatedEnvio()
     {
         $this->actualizar_montos();
+        if ($this->cajero->modo == 1) {
         $this->dispatch('dirigir_cursor');
+        }
     }
 
     public function updatedCantidadRecibida()
@@ -328,7 +349,9 @@ class Pos extends Component
             $this->dispatch('avertencia_stock');
         }
         $this->reset('buscar_producto');
+        if ($this->cajero->modo == 1) {
         $this->dispatch('dirigir_cursor');
+        }
     }
 
     public function eliminar_venta(Posventa $posventa_id)
@@ -477,7 +500,10 @@ class Pos extends Component
                 $this->items[$key]['importe'] =  $this->items[$key]['importe_previo'] - $this->items[$key]['descuento'];
             }
             $this->actualizar_montos();
+            if ($this->cajero->modo == 1)
+            {
             $this->dispatch('dirigir_cursor');
+            }
         }
     }
 
