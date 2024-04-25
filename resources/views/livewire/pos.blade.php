@@ -1,6 +1,6 @@
 <div>
     <div class="row">
-        <div class="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-5">
+        <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-5">
             <div class="card text-center">
                 <div class="card-header">
                     <div class="row justify-content-between" style="text-align: right;">
@@ -63,7 +63,7 @@
                                         wire:click="cerrar_caja('{{ $cajero->cajas->where('fecha_cierre', false)->first()->id }}')"
                                         wire:confirm="¿Esta Seguro que Desea Cerrar Caja?">Cerrar Caja</button>
                                 @else
-                                    Monto Inicial : <b>s/.0</b>
+                                    Monto Inicial : <b>{{$configuracion->moneda->simbolo}} 0</b>
                                 @endif
                             </div>
                         @endif
@@ -209,7 +209,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-7">
+        <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-7">
             <div class="card">
                 <div class="card-body">
                     @if ($seleccionar_almacen)

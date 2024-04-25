@@ -62,12 +62,13 @@
 
         function imprimir_comprobant_pdf_js(nombreImpresora,urlPdf)
         {
-            const url = `http://localhost:8080/url?urlPdf=${urlPdf}&impresora=${nombreImpresora}`;
+            const url = `http://localhost:8888?printer=${nombreImpresora}&url=${urlPdf}&count=1`;
+            alert(url);
             fetch(url)
                 .then(respuesta => {
                     // Si la respuesta es OK, entonces todo fue bien
                     if (respuesta.status === 200) {
-                        /////
+                        alert('correcto');
                     } else {
                         ///////
                     }
@@ -75,5 +76,4 @@
         }
     </script>
 </body>
-
 </html>

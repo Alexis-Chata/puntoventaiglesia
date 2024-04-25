@@ -7,6 +7,7 @@ use App\Models\CompuestoProducto;
 use App\Models\Configuracion;
 use App\Models\Producto;
 use App\Models\ProductoAlmacen;
+use App\Models\Almacen;
 use App\Traits\ImagenTrait;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
@@ -172,7 +173,18 @@ class ProductoForm extends Form
                 $new_com_pro->cantidad = $this->productos_compuesto[$key]['cantidad'];
                 $new_com_pro->save();
             }
+
+            #agregar a los almacenes
+            $almacenes = Almacen::all();
+            foreach ($almacenes as $tey => $alm) {
+                    $ne_pro_alm = new ProductoAlmacen();
+                    $ne_pro_alm->almacen_id  = $alm->id;
+                    $ne_pro_alm->producto_id = $this->producto->id;
+                    $ne_pro_alm->stock = 0;
+                    $ne_pro_alm->save();
+            }
         }
+
     }
 
     public function agregar_producto_compuesto($codigo){

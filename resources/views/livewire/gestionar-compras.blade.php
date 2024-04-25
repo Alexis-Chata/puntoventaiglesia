@@ -55,7 +55,7 @@
                             </div>
                         </div>
                         <div class="row mb-4">
-                            <div class="col-12">
+                            <div class="col-12 table-responsive">
                                 <table class="table table-hover">
                                     <thead class="table-light">
                                         <tr class="text-center">

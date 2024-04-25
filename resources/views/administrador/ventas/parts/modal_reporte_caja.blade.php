@@ -31,24 +31,35 @@
                                 <b>Monto Inicial :</b> {{ $configuracion->moneda->simbolo }}.0
                             @endif
                         </div>
-                        <div class="col-12">
+                        <div class="col-12 table-responsive">
                             <table class="table table-striped">
                                 <thead class="table-dark">
                                     <tr>
                                         <th class="text-center">Tipo de movimiento</th>
                                         <th class="text-center">Cliente</th>
                                         <th class="text-center">Signo</th>
+                                        <th class="text-center">Deuda</th>
                                         <th class="text-center">Ingreso</th>
                                         <th class="text-center">Egreso</th>
                                         <th class="text-center">Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @php $total_deuda_mov_caja = 0;  @endphp
                                     @foreach ($cajero->cajas->where('fecha_cierre', false)->first()->mcajas as $mcaja)
                                         <tr>
                                             <td class="text-center">{{ $mcaja->tmovmientocaja->name }}</td>
                                             <td class="text-center">@if ($mcaja->tmovimiento_caja_id == 3) {{$mcaja->m_cajable->cliente_name}} @else - @endif</td>
                                             <td class="text-center">{{ $mcaja->signo }}</td>
+                                            <td class="text-center">
+                                                @if ($mcaja->signo == '+' && $mcaja->m_cajable_type == 'App\Models\Posventa')
+                                                @php
+                                                    $total_deuda_mov_caja = $total_deuda_mov_caja+$mcaja->m_cajable->monto_pendiente;
+                                                @endphp
+                                                    {{ $configuracion->moneda->simbolo . $mcaja->m_cajable->monto_pendiente }}
+                                                @else
+                                                @endif
+                                            </td>
                                             <td class="text-center">
                                                 @if ($mcaja->signo == '+')
                                                     {{ $configuracion->moneda->simbolo . $mcaja->monto }}
@@ -77,6 +88,9 @@
                                     @endforeach
                                     <tr>
                                         <td colspan="3" class="table-dark text-center">Total</td>
+                                        <td class="table-success text-center">
+                                            {{  $configuracion->moneda->simbolo . $total_deuda_mov_caja }}
+                                        </td>
                                         <td class="table-success text-center">
                                             {{ $configuracion->moneda->simbolo . $cajero->cajas->where('fecha_cierre', false)->first()->mcajas->where('signo', '+')->sum('monto') }}
                                         </td>
