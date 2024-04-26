@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Gasto extends Model
 {
     use HasFactory;
-    protected $fillable = ['fecha','almacen_id','tgasto_id','monto','detalles'];
+    protected $fillable = ['fecha','almacen_id','tgasto_id','monto','detalles','ignorar'];
 
     public function tgasto()
     {

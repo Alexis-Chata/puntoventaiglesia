@@ -3,6 +3,7 @@
 namespace App\Livewire\Forms;
 
 use App\Models\Gasto;
+use App\Models\Tgasto;
 use Livewire\Attributes\Validate;
 use Livewire\Form;
 
@@ -14,6 +15,7 @@ class GastosForm extends Form
     public $tgasto_id;
     public $monto;
     public $detalles;
+    public $ignorar;
 
 
 
@@ -35,12 +37,16 @@ class GastosForm extends Form
 
     public function update(){
         $this->validate();
+        $btgasto = Tgasto::find($this->tgasto_id);
+        $this->ignorar = $btgasto->ignorar;
         $this->gasto->update($this->all());
     }
 
     public function store()
     {
         $this->validate();
+        $btgasto = Tgasto::find($this->tgasto_id);
+        $this->ignorar = $btgasto->ignorar;
         $this->gasto = Gasto::create($this->all());
     }
 }

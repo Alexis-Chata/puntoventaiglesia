@@ -38,7 +38,7 @@ class ReporteGeneral extends Component
 
         $monto_ventas = Posventa::query();
         $monto_compras = PagoCompra::query();
-        $monto_gastos = Gasto::query();
+        $monto_gastos = Gasto::query()->where('ignorar','0');
 
         $productos_almacen = ProductoAlmacen::query()->whereExists(function ($query)  {
             $query->select()

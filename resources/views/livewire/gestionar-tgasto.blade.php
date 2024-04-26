@@ -41,6 +41,7 @@
                                         <tr class="text-center">
                                             <th>Nombre</th>
                                             <th>Descripción</th>
+                                            <th>Ignorar</th>
                                             <th>Accion</th>
                                         </tr>
                                     </thead>
@@ -49,6 +50,13 @@
                                             <tr class="text-center">
                                                 <td>{{ $tgasto->name }}</td>
                                                 <td>{{ $tgasto->descripcion }}</td>
+                                                <td>
+                                                    @if ($tgasto->ignorar == 1)
+                                                        Si
+                                                    @else
+                                                        No
+                                                    @endif
+                                                </td>
                                                 <td>
                                                     <button type="button" class="btn btn-primary"
                                                         data-bs-toggle="modal" data-bs-target="#modalTgasto"

@@ -92,7 +92,6 @@
                                     wire:model='ajustesistemaform.pie_pagina_factura'></textarea>
                             </div>
                             <div class="col-sm-12 col-md-4 col-lg-4">
-
                                 <input type="checkbox" @if ($ajustesistemaform->cotizacion_stock == 1) checked
                                 @endif id="cotizacion_stock" wire:model='ajustesistemaform.cotizacion_stock'>
                                 <label class="form-check-label" for="cotizacion_stock">Crear Cotización con stock</label><br>

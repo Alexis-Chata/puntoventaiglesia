@@ -45,6 +45,7 @@
                                             <th>Monto</th>
                                             <th>Categoría</th>
                                             <th>Almacen</th>
+                                            <th>Ignorar</th>
                                             <th>Accion</th>
                                         </tr>
                                     </thead>
@@ -56,7 +57,14 @@
                                                 <td>{{ $gasto->detalles }}</td>
                                                 <td>{{ number_format($gasto->monto,2) }}</td>
                                                 <td>{{ $gasto->tgasto->name }}</td>
-                                                <td>{{ $gasto->almacen->name }}</td>
+                                                <td>{{ $gasto->almacen->nombre }}</td>
+                                                <td>
+                                                    @if ($gasto->ignorar == 1)
+                                                        Si
+                                                    @else
+                                                        No
+                                                    @endif
+                                                    </td>
                                                 <td>
                                                     <button type="button" class="btn btn-primary"
                                                         data-bs-toggle="modal" data-bs-target="#modalGasto"
@@ -69,6 +77,7 @@
                                                         <i class="fas fa-trash"></i>
                                                     </button>
                                                 </td>
+
                                             </tr>
                                         @empty
                                         @endforelse

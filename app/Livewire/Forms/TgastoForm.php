@@ -11,6 +11,7 @@ class TgastoForm extends Form
     public ?Tgasto $tgasto;
     public $name;
     public $descripcion;
+    public $ignorar;
 
     public $rules = [
         'name' => 'required',
@@ -20,6 +21,7 @@ class TgastoForm extends Form
     {
         $this->tgasto = $tgasto;
         $this->name = $tgasto->name;
+        $this->ignorar = $tgasto->ignorar;
         $this->descripcion = $tgasto->descripcion;
     }
 

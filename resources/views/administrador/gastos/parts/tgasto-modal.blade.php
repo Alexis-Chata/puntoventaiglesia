@@ -25,6 +25,10 @@
                             <textarea class="form-control" id="tgasto_descripcion" cols="30" rows="10" wire:model="tgastoform.descripcion"></textarea>
                             @error('tgastoform.descripcion')<div class="p-1" style="color:red;"> {{ $message }}</div>@enderror
                         </div>
+                        <div class="col-sm-12 col-md-4 col-lg-4">
+                            <input type="checkbox" id="tgastoform_ignorar"   wire:model='s_ignorar'>
+                            <label class="form-check-label" for="tgastoform_ignorar">Ignorar</label>
+                        </div>
                     </div>
                 </form>
             </div>
