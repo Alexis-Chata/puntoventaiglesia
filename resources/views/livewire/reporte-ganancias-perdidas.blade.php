@@ -1,7 +1,7 @@
 <div>
 
-    <div class="row">
-        <div class="col-sm-6 col-12 mb-3">
+    <div class="row align-items-end">
+        <div class="col-sm-3 col-12 mb-3">
             <label for="">Elegir Almacen</label>
             <select name="almacen" id="" class="form-select" wire:model='salmacen'>
                     <option value="">Elegir</option>
@@ -17,6 +17,12 @@
         <div class="col-12 col-sm-3 mb-3" >
             <label for="fecha_final">Fecha Final</label>
             <input type="date" class="form-control" wire:model.live='fecha_final'  id="fecha_final">
+        </div>
+        <div class="col-12 col-sm-3 mb-3">
+            <button class="btn btn-success" wire:loading.attr="disabled" wire:target="descargar_reporte_general_excel" wire:click='descargar_reporte_general_excel'>Descargar Reporte EXCEL</button>
+        </div>
+        <div class="col-12 col-sm-3 mb-3">
+            <button class="btn btn-danger" wire:loading.attr="disabled" wire:target="descargar_reporte_general_pdf" wire:click='descargar_reporte_general_pdf'>Descargar Reporte PDF</button>
         </div>
     </div>
     <div class="row">

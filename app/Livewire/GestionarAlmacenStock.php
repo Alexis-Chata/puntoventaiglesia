@@ -7,6 +7,7 @@ use App\Livewire\Forms\AlmacenStockForm;
 use App\Models\Almacen;
 use App\Models\Configuracion;
 use App\Models\ProductoAlmacen;
+use App\Models\Producto;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -140,6 +141,7 @@ class GestionarAlmacenStock extends Component
     }*/
 
     public function descargar_reporte_almacen_pdf(){
+        $bproductos = Producto::all();
         $productos_almacen = ProductoAlmacen::query()->whereExists(function ($query)  {
             $query->select()
                   ->from(DB::raw('productos'))
@@ -179,7 +181,7 @@ class GestionarAlmacenStock extends Component
         $productos_almacen =  $productos_almacen->get();
         $configuracion = Configuracion::find(1);
         $nombre_archivo = 'Reporte-productos-almacen-' . date("F j, Y, g:i a") . '.pdf';
-        $consultapdf = FacadePdf::loadView('administrador.almacen.reporte_productos_almacen_pdf', compact('productos_almacen','configuracion'))->setPaper('a4', 'landscape');
+        $consultapdf = FacadePdf::loadView('administrador.almacen.reporte_productos_almacen_pdf', compact('productos_almacen','configuracion','bproductos'))->setPaper('a4', 'landscape');
         $pdfContent = $consultapdf->output();
         return response()->streamDownload(
             fn () => print($pdfContent),

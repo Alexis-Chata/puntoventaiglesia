@@ -12,4 +12,12 @@ class Devolucion extends Model
     public function devoluciondetalles(){
         return $this->hasMany(DevolucionDetalle::class,'devolucion_id');
     }
+
+    public function posventa(){
+        return $this->belongsTo(Posventa::class);
+    }
+
+    public function almacen(){
+        return $this->belongsTo(Almacen::class);
+    }
 }

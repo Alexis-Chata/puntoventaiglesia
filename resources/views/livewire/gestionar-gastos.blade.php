@@ -39,7 +39,7 @@
                                 <table class="table table-hover">
                                     <thead class="table-light">
                                         <tr class="text-center">
-                                            <th>Nombre</th>
+                                            <th>Fecha</th>
                                             <th>Referencia</th>
                                             <th>Detalles</th>
                                             <th>Monto</th>

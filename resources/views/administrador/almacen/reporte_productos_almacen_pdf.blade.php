@@ -50,6 +50,28 @@
                 <table>
                     <thead>
                         <tr>
+                            <th style="background-color: black;color:white;width:240px;text-align:center;border: solid 1px black">Tipo de Producto</th>
+                            <th style="background-color: black;color:white;width:180px;text-align:center;border: solid 1px black">Cantidad</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                            <tr>
+                                <td style="text-align:center;border: solid 1px black">Estandar</td>
+                                <td style="text-align:center;border: solid 1px black">{{ $bproductos->where('tipo','estandar')->count() }}</td>
+                            </tr>
+                            <tr>
+                                <td style="text-align:center;border: solid 1px black">Compuestos</td>
+                                <td style="text-align:center;border: solid 1px black">{{ $bproductos->where('tipo','compuesto')->count() }}</td>
+                            </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-12">
+                <table>
+                    <thead>
+                        <tr>
                             <th style="background-color: black;color:white;width:240px;text-align:center;border: solid 1px black">Producto</th>
                             <th style="background-color: black;color:white;width:180px;text-align:center;border: solid 1px black">Almacen</th>
                             <th style="background-color: black;color:white;width:120px;text-align:center;border: solid 1px black">Stock</th>
@@ -74,15 +96,15 @@
                                             &&
                                     $palmacen->stock <=2
                                     )
-                                    <td class="table-warning" style="text-align:center;border: solid 1px black">
+                                    <td class="table-warning text-center" style="text-align:center;border: solid 1px black">
                                         <span class="badge text-bg-warning">Por Acabar</span>
                                     <t/d>
                                     @elseif ($palmacen->stock >= 3 && $palmacen->stock <= $palmacen->producto->alerta_stock)
-                                    <td>
+                                    <td class="table-success text-center">
                                         <span class="badge text-bg-success">Suficiente</span>
                                     </td>
                                     @elseif ($palmacen->stock > $palmacen->producto->alerta_stock )
-                                    <td class="table-info">
+                                    <td class="table-info text-center">
                                     <span class="badge text-bg-info">Exceso</span>
                                     </td>
                                     @endif
