@@ -44,11 +44,11 @@
                     </tr>
                     <tr>
                         <td>Costo</td>
-                        <td>s/.{{$producto->costo}}</td>
+                        <td>{{$configuracion->moneda->simbolo.$producto->costo}}</td>
                     </tr>
                     <tr>
                         <td>Precio</td>
-                        <td>s/.{{$producto->precio}}</td>
+                        <td>{{$configuracion->moneda->simbolo.$producto->precio}}</td>
                     </tr>
                     <tr>
                         <td>Unidad</td>
