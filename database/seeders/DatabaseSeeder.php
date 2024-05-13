@@ -85,10 +85,10 @@ class DatabaseSeeder extends Seeder
             }
         */
         $almacen = Almacen::all();
-        $pagocompras = PagoCompra::where('created_at','2024-05-01 00:00:00')->get();
-        $devoluciones = Devolucion::where('created_at','2024-05-01 00:00:00')->get();
-        $gastos = Gasto::where('created_at','2024-05-01 00:00:00')->where('ignorar',0)->get();
-        $posventas = Posventa::where('created_at','2024-05-01 00:00:00')->get();
+        $pagocompras = PagoCompra::where('created_at','>=','2024-05-01 00:00:00')->get();
+        $devoluciones = Devolucion::where('created_at','>=','2024-05-01 00:00:00')->get();
+        $gastos = Gasto::where('created_at','>=','2024-05-01 00:00:00')->where('ignorar',0)->get();
+        $posventas = Posventa::where('created_at','>=','2024-05-01 00:00:00')->get();
 
         foreach ($pagocompras as $key => $pagocompra) {
             foreach ($almacen as $key => $alm) {
