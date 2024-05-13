@@ -24,21 +24,21 @@
     </table>
     <table>
         <tr>
-            <td>FECHA</td>
-            <td>DESCRIPCIÓN</td>
-            <td>PROVEEDOR/COMUNIDAD</td>
-            <td>NOMBRE DE LA CUENTA</td>
-            <td>Docto. No.</td>
-            <td>INGRESOS</td>
-            <td>EGRESOS</td>
-            <td>SALDO</td>
-            <td>ACCIÓN</td>
-            <td>T. MOVIMIENTOS</td>
+            <td style="text-align:center;border:solid 1px #0a0a0a;background-color: #9b9b9b;">FECHA</td>
+            <td style="text-align:center;border:solid 1px #0a0a0a;background-color: #9b9b9b;">DESCRIPCIÓN</td>
+            <td style="text-align:center;border:solid 1px #0a0a0a;background-color: #9b9b9b;">PROVEEDOR/COMUNIDAD</td>
+            <td style="text-align:center;border:solid 1px #0a0a0a;background-color: #9b9b9b;">NOMBRE DE LA CUENTA</td>
+            <td style="text-align:center;border:solid 1px #0a0a0a;background-color: #9b9b9b;">Docto. No.</td>
+            <td style="text-align:center;border:solid 1px #0a0a0a;background-color: #9b9b9b;">INGRESOS</td>
+            <td style="text-align:center;border:solid 1px #0a0a0a;background-color: #9b9b9b;">EGRESOS</td>
+            <td style="text-align:center;border:solid 1px #0a0a0a;background-color: #9b9b9b;">SALDO</td>
+            <td style="text-align:center;border:solid 1px #0a0a0a;background-color: #9b9b9b;">ACCIÓN</td>
+            <td style="text-align:center;border:solid 1px #0a0a0a;background-color: #9b9b9b;">T. MOVIMIENTOS</td>
         </tr>
         @foreach ($movimientos as $mov)
         <tr>
-            <td>{{ $mov->created_at }}</td>
-            <td>
+            <td style="border: solid 1px black;text-align: center;">{{ $mov->created_at }}</td>
+            <td style="border: solid 1px black;text-align: center;">
                 @if ($mov->movimientoable_type == 'App\Models\Posventa')
                     @foreach ($mov->movimientoable->posventadetalles as $tey => $item)
                         {{$item->producto_nombre}}
@@ -54,8 +54,8 @@
                     {{$mov->movimientoable->detalles}}
                 @endif
             </td>
-            <td>Varios</td>
-            <td>
+            <td style="border: solid 1px black;text-align: center;">Varios</td>
+            <td style="border: solid 1px black;text-align: center;">
                 @if ($mov->movimientoable_type == 'App\Models\Posventa')
                     Venta
                 @elseif($mov->movimientoable_type == 'App\Models\PagoCompra')
@@ -66,30 +66,28 @@
                     Gastos
                 @endif
             </td>
-            <td>
+            <td style="border: solid 1px black;text-align: center;">
                 {{$mov->movimientoable_id}}
             </td>
-            <td>
+            <td style="border: solid 1px black;text-align: center;">
                 @if ($mov->tipo_movimiento == '+')
                     {{$mov->monto}}
                 @else
                 0
                 @endif
             </td>
-            <td>
+            <td style="border: solid 1px black;text-align: center;">
                 @if ($mov->tipo_movimiento == '-')
                     {{$mov->monto}}
                 @else
                 0
                 @endif
             </td>
-            <td>{{ $mov->saldo }}</td>
-            <td>{{ $mov->accion }}</td>
-            <td>{{ $mov->tipo_movimiento }}</td>
+            <td style="border: solid 1px black;text-align: center;">{{ $mov->saldo }}</td>
+            <td style="border: solid 1px black;text-align: center;">{{ $mov->accion }}</td>
+            <td style="border: solid 1px black;text-align: center;">{{ $mov->tipo_movimiento }}</td>
         </tr>
         @endforeach
     </table>
-
-
 </body>
 </html>
