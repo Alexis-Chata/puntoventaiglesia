@@ -15,6 +15,10 @@ class Compra extends Model
     ];
     use HasFactory;
 
+    public function movimientoable(){
+        return $this->morphTo();
+    }
+
     public function proveedor()
     {
         return $this->belongsTo(Proveedor::class);

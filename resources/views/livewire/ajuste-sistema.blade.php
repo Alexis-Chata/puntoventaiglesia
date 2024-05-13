@@ -79,6 +79,14 @@
                                 <label for="direccion" class="form-label">Dirección <span style="color:red;">*</span></label>
                                 <textarea rows="2" class="form-control" id="direccion" wire:model='ajustesistemaform.direccion'></textarea>
                             </div>
+                            <div class="col-sm-12">
+                                <label for="direccion" class="form-label">Descripción A reporte Auxiliar<span style="color:red;">*</span></label>
+                                <textarea rows="2" class="form-control" id="descripcion" wire:model='ajustesistemaform.descripcion'></textarea>
+                            </div>
+                            <div class="col-sm-12">
+                                <label for="direccion" class="form-label">Descripción B reporte Auxiliar <span style="color:red;">*</span></label>
+                                <textarea rows="2" class="form-control" id="descripcion2" wire:model='ajustesistemaform.descripcion2'></textarea>
+                            </div>
                         </div>
                         <div class="row mb-3">
                             <div class="col-sm-12 col-md-4 col-lg-4">

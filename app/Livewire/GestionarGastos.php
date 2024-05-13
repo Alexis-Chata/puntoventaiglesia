@@ -45,7 +45,7 @@ class GestionarGastos extends Component
     }
 
     public function eliminar(Gasto $gasto){
-        $gasto->delete();
+        $this->gastoform->eliminar_gasto($gasto);
         $this->updatedSearch();
     }
 

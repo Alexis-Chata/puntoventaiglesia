@@ -20,7 +20,7 @@ class ReporteGeneralExcel implements FromView
     private $lista_compras;
     private $lista_devoluciones;
     private $lista_gastos;
-
+    private $nombre_titulo;
 
     public function __construct
     (
@@ -34,7 +34,8 @@ class ReporteGeneralExcel implements FromView
         $lista_ventas,
         $lista_compras,
         $lista_devoluciones,
-        $lista_gastos
+        $lista_gastos,
+        $nombre_titulo
         )
     {
         $this->monto_ventas = $monto_ventas;
@@ -48,6 +49,7 @@ class ReporteGeneralExcel implements FromView
         $this->lista_compras = $lista_compras;
         $this->lista_devoluciones = $lista_devoluciones;
         $this->lista_gastos = $lista_gastos;
+        $this->nombre_titulo = $nombre_titulo;
     }
 
     use Exportable;
@@ -65,6 +67,7 @@ class ReporteGeneralExcel implements FromView
             'lista_compras' => $this->lista_compras,
             'lista_devoluciones' => $this->lista_devoluciones,
             'lista_gastos' => $this->lista_gastos,
+            'nombre_titulo' => $this->nombre_titulo,
         ]);
     }
 }

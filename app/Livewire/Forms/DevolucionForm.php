@@ -36,12 +36,15 @@ class DevolucionForm extends Form
     public $productos_totales;
     public $estado_devolucion;
     public $detalles_devolucion = [];
+    private AlmacenForm $almacenform;
+    private MovimientoForm $movimientoform;
 
     public $rules = [
         'fecha' => 'required',
     ];
 
-    public function agregar_datos_venta(Posventa $posventa){
+    public function agregar_datos_venta(Posventa $posventa)
+    {
         $this->fecha = date('Y-m-d');
         $this->posventa = $posventa;
         $this->posventa_id = $posventa->id;
@@ -104,7 +107,8 @@ class DevolucionForm extends Form
         $this->total_pagar = $this->total_sin_impuesto-$this->impuesto_monto-$this->descuento-$this->envio;
     }
 
-    public function crear_devolucion(){
+    public function crear_devolucion()
+    {
         $this->validate($this->rules);
         $n_devolucion = new Devolucion();
         $n_devolucion->fecha = $this->fecha;
@@ -140,9 +144,15 @@ class DevolucionForm extends Form
             $n_det_dev->save();
             $this->agregar_stock_almacen($n_det_dev->producto_id,$n_det_dev->producto_cantidad,$n_devolucion->almacen_id);
         }
+
+        $this->almacenform = new AlmacenForm();
+        $this->movimientoform = new MovimientoForm();
+        $saldo = $this->almacenform->agregar_descontar_monto_almacen($this->almacen_id,$this->total_pagar,'-');
+        $this->movimientoform->agregar_movimiento($n_devolucion->id,$this->almacen_id,$this->total_pagar,$saldo,'-','App\Models\Devolucion','crear');
     }
 
-    public function agregar_stock_almacen($producto_id,$cantidad,$almacen_id){
+    public function agregar_stock_almacen($producto_id,$cantidad,$almacen_id)
+    {
         $b_almacen_producto = ProductoAlmacen::where('producto_id',$producto_id)->where('almacen_id',$almacen_id)->first();
         if ($b_almacen_producto){$b_almacen_producto->stock = $b_almacen_producto->stock+$cantidad;}
         else{
@@ -174,5 +184,4 @@ class DevolucionForm extends Form
                 $nombre_archivo
             );
     }
-
 }

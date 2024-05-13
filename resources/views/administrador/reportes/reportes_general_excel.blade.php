@@ -18,7 +18,7 @@
 <br>
 <table>
     <tr>
-        <td colspan="2" style="background-color: black;color:white;text-align:center;">Reporte General</td>
+        <td colspan="2" style="background-color: black;color:white;text-align:center;">Reporte General @if ($nombre_titulo) - {{$nombre_titulo}} @endif</td>
     </tr>
     <tr>
         <td style="background-color: black;color:white;width:200px;" >Ventas</td>

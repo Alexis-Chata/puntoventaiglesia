@@ -82,6 +82,7 @@ class ComprasForm extends Form
             $this->detalle_compra[$dcompra->codigo]['cantidad'] = $dcompra->cantidad;
             $this->detalle_compra[$dcompra->codigo]['costo_unitario'] = $dcompra->costo_unitario;
             $this->detalle_compra[$dcompra->codigo]['descuento'] = $dcompra->descuento;
+            $this->detalle_compra[$dcompra->codigo]['precio'] = $bproducto->precio;
             $this->detalle_compra[$dcompra->codigo]['impuesto'] = $dcompra->impuesto;
             $this->detalle_compra[$dcompra->codigo]['total_parcial'] = $dcompra->total_parcial;
             $this->detalle_compra[$dcompra->codigo]['producto_id'] = $dcompra->producto_id;

@@ -2,9 +2,11 @@
 
 namespace App\Livewire;
 
+use App\Livewire\Forms\AlmacenForm;
 use App\Livewire\Forms\CajaForm;
 use App\Livewire\Forms\ClientesForm;
 use App\Livewire\Forms\GastosForm;
+use App\Livewire\Forms\MovimientoForm;
 use App\Livewire\Forms\PosVentaForm;
 use App\Livewire\Forms\ProductoForm;
 use App\Models\Almacen;
@@ -68,6 +70,25 @@ class Pos extends Component
     public $gasto_id_eliminar;
     public $buscar_producto;
     public $simpresora='';
+    private AlmacenForm $almacenform;
+    private MovimientoForm $movimientoform;
+
+    public function mount()
+    {
+        $this->cajero = User::find(Auth::user()->id);
+        $this->almacen_id = Almacen::first() ? Almacen::first()->id : null;
+        if (isset($this->cajero->almacensuser->first()->almacen_id))
+        {
+            $this->almacen_id = $this->cajero->almacensuser->first()->almacen_id;
+        }
+        else {$this->almacen_id = Almacen::first() ? Almacen::first()->id : null;}
+        $this->configuracion = Configuracion::find(1);
+        $this->items = [];
+        $this->updatedAlmacenId();
+        $this->impuesto_porcentaje = 0;
+        $this->cliente_por_defecto();
+        $this->cajaform->caja = $this->cajero->cajas->where('fecha_cierre', false)->first();
+    }
 
     public function cambiar_modo_usuario()
     {
@@ -91,7 +112,6 @@ class Pos extends Component
         return $this->posventaform->descargar_pdf($posventa);
     }
     /*caja*/
-
     public function updatedBuscarProducto()
     {
         $bproducto = Producto::where('codigo', $this->buscar_producto)->first();
@@ -148,18 +168,6 @@ class Pos extends Component
             $this->titlemodal = 'Editar';
             $this->gastoform->set($gasto);
         }
-    }
-
-    public function mount()
-    {
-        $this->almacen_id = Almacen::first() ? Almacen::first()->id : null;
-        $this->configuracion = Configuracion::find(1);
-        $this->items = [];
-        $this->updatedAlmacenId();
-        $this->impuesto_porcentaje = 0;
-        $this->cajero = User::find(Auth::user()->id);
-        $this->cliente_por_defecto();
-        $this->cajaform->caja = $this->cajero->cajas->where('fecha_cierre', false)->first();
     }
 
     public function cliente_por_defecto()
@@ -284,7 +292,7 @@ class Pos extends Component
             $cantidad_stock_disponible = $cantidad_stock_disponible - max($lista_cantidades);
         }
 
-        if ($cantidad_stock_disponible > $cantidad_existente) {
+        if ($cantidad_stock_disponible > $cantidad_existente or $producto->ilimitado == 1) {
             $stock_disponible = true;
         }
         return $stock_disponible;
@@ -375,6 +383,11 @@ class Pos extends Component
         }
         else
         {
+            $this->almacenform = new AlmacenForm();
+            $this->movimientoform = new MovimientoForm();
+            $saldo = $this->almacenform->agregar_descontar_monto_almacen($this->posventa_id_eliminar->almacen_id, $this->posventa_id_eliminar->monto_pago,'-');
+            $this->movimientoform->agregar_movimiento($this->posventa_id_eliminar->id,$this->posventa_id_eliminar->almacen_id,$this->posventa_id_eliminar->monto_pago,$saldo,'+','App\Models\Posventa','Eliminar');
+
             $this->posventa_id_eliminar->estado_posventa = 'eliminado';
             $this->posventa_id_eliminar->save();
             if ($this->posventa_id_eliminar->m_caja->tmovimiento_caja_id == 3) {
@@ -429,6 +442,12 @@ class Pos extends Component
             $this->gasto_id_eliminar->m_caja->caja->monto += $this->gasto_id_eliminar->m_caja->monto;
             $this->gasto_id_eliminar->m_caja->caja->save();
         }
+
+        $this->almacenform = new AlmacenForm();
+            $this->movimientoform = new MovimientoForm();
+            $saldo = $this->almacenform->agregar_descontar_monto_almacen($this->gasto_id_eliminar->almacen_id, $this->gasto_id_eliminar->monto,'+');
+            $this->movimientoform->agregar_movimiento($this->gasto_id_eliminar->id,$this->gasto_id_eliminar->almacen_id,$this->gasto_id_eliminar->monto,$saldo,'+','App\Models\Posventa','Eliminar');
+
 
         $this->gasto_id_eliminar->m_caja->delete();
         $this->gasto_id_eliminar->delete();
@@ -490,7 +509,10 @@ class Pos extends Component
                     }
                 }
 
-                if ($cantidad_stock_disponible < $item['cantidad']) {
+                if($bproducto->ilimitado == 1){
+
+                }
+                elseif ($cantidad_stock_disponible < $item['cantidad']) {
                     $this->items[$key]['cantidad'] = $cantidad_stock_disponible;
                 }
                 $this->items[$key]['cantidad'] = empty($this->items[$key]['cantidad']) ? 1 : $this->items[$key]['cantidad'];
@@ -551,6 +573,12 @@ class Pos extends Component
             $posventa->productos_totales = collect($this->items)->count();
             $posventa->estado_posventa = $this->monto_pendiente > 0 ? "Parcial" : "Completo";
             $posventa->save();
+            $this->almacenform = new AlmacenForm();
+            $this->movimientoform = new MovimientoForm();
+            $saldo = $this->almacenform->agregar_descontar_monto_almacen($posventa->almacen_id, $posventa->monto_pago,'+');
+            $this->movimientoform->agregar_movimiento($posventa->id,$posventa->almacen_id,$posventa->monto_pago,$saldo,'+','App\Models\Posventa','crear');
+
+
             $posventa->m_caja()->create(['tmovimiento_caja_id' => '3', 'caja_id' => $this->cajaform->caja->id, 'signo' => '+', 'monto' => $this->monto_pago]);
             $this->cajaform->caja->monto += $this->monto_pago;
             $this->cajaform->caja->save();

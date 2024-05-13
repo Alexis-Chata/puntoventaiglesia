@@ -22,6 +22,8 @@ class Configuracion extends Model
         'pie_pagina_factura',
         'cotizacion_stock',
         'almacen_id',
+        'descripcion',
+        'descripcion2'
     ];
     use HasFactory;
 

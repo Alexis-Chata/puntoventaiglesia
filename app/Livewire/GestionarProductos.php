@@ -41,7 +41,6 @@ class GestionarProductos extends Component
 
     public function updatedBuscarMarca()
     {
-
         $this->iteration++;
         $this->dispatch('activar_buscador_marca');
 

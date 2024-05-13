@@ -10,6 +10,11 @@ class Gasto extends Model
     use HasFactory;
     protected $fillable = ['fecha','almacen_id','tgasto_id','monto','detalles','ignorar'];
 
+    public function movimientos()
+    {
+        return $this->morphToMany('App\Models\Movimiento','movimientoable');
+    }
+
     public function tgasto()
     {
         return $this->belongsTo(Tgasto::class);

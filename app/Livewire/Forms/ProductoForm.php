@@ -37,6 +37,7 @@ class ProductoForm extends Form
     public $compra_unidad;
     public $alerta_stock = 0;
     public $imagen;
+    public $ilimitado;
     public $productos_compuesto = [];
     public $productos_compuesto_total = 0;
 
@@ -86,6 +87,8 @@ class ProductoForm extends Form
         $this->venta_unidad = $producto->venta_unidad;
         $this->compra_unidad = $producto->compra_unidad;
         $this->alerta_stock = $producto->alerta_stock;
+        $this->ilimitado = $producto->ilimitado;
+
         if ($producto->tipo == 'compuesto') {
             foreach ($producto->pcompuestos as $key => $pcom)
             {

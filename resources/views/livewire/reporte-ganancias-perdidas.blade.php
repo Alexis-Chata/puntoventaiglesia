@@ -3,7 +3,7 @@
     <div class="row align-items-end">
         <div class="col-sm-3 col-12 mb-3">
             <label for="">Elegir Almacen</label>
-            <select name="almacen" id="" class="form-select" wire:model='salmacen'>
+            <select name="almacen" id="" class="form-select" wire:model.live='salmacen'>
                     <option value="">Elegir</option>
                     @foreach ($almacens as $almacen)
                     <option value="{{$almacen->id}}">{{$almacen->nombre}}</option>
@@ -19,11 +19,19 @@
             <input type="date" class="form-control" wire:model.live='fecha_final'  id="fecha_final">
         </div>
         <div class="col-12 col-sm-3 mb-3">
-            <button class="btn btn-success" wire:loading.attr="disabled" wire:target="descargar_reporte_general_excel" wire:click='descargar_reporte_general_excel'>Descargar Reporte EXCEL</button>
+            <button class="btn btn-success" wire:loading.attr="disabled" wire:target="descargar_reporte_general_excel" wire:click='descargar_reporte_general_excel'>Reporte EXCEL</button>
         </div>
         <div class="col-12 col-sm-3 mb-3">
-            <button class="btn btn-danger" wire:loading.attr="disabled" wire:target="descargar_reporte_general_pdf" wire:click='descargar_reporte_general_pdf'>Descargar Reporte PDF</button>
+            <button class="btn btn-danger" wire:loading.attr="disabled" wire:target="descargar_reporte_general_pdf" wire:click='descargar_reporte_general_pdf'>Reporte PDF</button>
         </div>
+        @if ($this->salmacen != '')
+            <div class="col-12 col-sm-3 mb-3">
+                <button class="btn btn-warning" wire:loading.attr="disabled" wire:target="descargar_reporte_general_auxiliar_pdf" wire:click='descargar_reporte_general_auxiliar_pdf'>Reporte Auxiliar PDF</button>
+            </div>
+            <div class="col-12 col-sm-3 mb-3">
+                <button class="btn btn-info" wire:loading.attr="disabled" wire:target="descargar_reporte_general_auxiliar_excel" wire:click='descargar_reporte_general_auxiliar_excel'>Reporte Auxiliar EXCEL</button>
+            </div>
+        @endif
     </div>
     <div class="row">
         <div class="col-12 fs-3">

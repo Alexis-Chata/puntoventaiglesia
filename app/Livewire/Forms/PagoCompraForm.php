@@ -19,6 +19,8 @@ class PagoCompraForm extends Form
     public $monto_pago;
     public $cambio;
     public $nota = null;
+    private AlmacenForm $almacenform;
+    private MovimientoForm $movimientoform;
 
     public $rules =
     [
@@ -54,7 +56,13 @@ class PagoCompraForm extends Form
 
     public function update(){
         $this->validate($this->rules);
+        $bcompra = PagoCompra::find($this->pagocompra->id);
+        ##########################
+        $saldo = $this->almacenform->agregar_descontar_monto_almacen($bcompra->compra->almacen_id,$bcompra->monto_pago,'+');
+        $this->movimientoform->agregar_movimiento($bcompra->id,$bcompra->compra->almacen_id,$bcompra->monto_pago,$saldo,'+','App\Models\PagoComprar','editar');
         $this->pagocompra->update($this->all());
+        $saldoa = $this->almacenform->agregar_descontar_monto_almacen($this->pagocompra->compra->almacen_id,$this->monto_pago,'-');
+        $this->movimientoform->agregar_movimiento($this->pagocompra->id,$this->pagocompra->compra->almacen_id,$this->monto_pago,$saldoa,'-','App\Models\PagoComprar','editar');
     }
 
     public function store()
@@ -64,6 +72,11 @@ class PagoCompraForm extends Form
         $this->validate($this->rules);
         $this->pagocompra = PagoCompra::create($this->all());
         $this->actualizar_compra($this->pagocompra->compra_id);
+
+        $this->almacenform = new AlmacenForm();
+        $this->movimientoform = new MovimientoForm();
+        $saldo = $this->almacenform->agregar_descontar_monto_almacen($this->pagocompra->compra->almacen_id,$this->monto_pago,'-');
+        $this->movimientoform->agregar_movimiento($this->pagocompra->id,$this->pagocompra->compra->almacen_id,$this->monto_pago,$saldo,'-','App\Models\Gasto','crear');
     }
 
     public function actualizar_compra($compra_id){

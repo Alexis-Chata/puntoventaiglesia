@@ -18,6 +18,8 @@ class AjusteSistemaForm extends Form
     public $desarrollador;
     public $pie_pagina;
     public $direccion;
+    public $descripcion;
+    public $descripcion2;
     public $pagina_factura;
     public $pie_pagina_factura;
     public $cotizacion_stock;
@@ -46,6 +48,8 @@ class AjusteSistemaForm extends Form
         $this->pie_pagina_factura = $configuracion->pie_pagina_factura;
         $this->cotizacion_stock = $configuracion->cotizacion_stock;
         $this->almacen_id = $configuracion->almacen_id;
+        $this->descripcion = $configuracion->descripcion;
+        $this->descripcion2 = $configuracion->descripcion2;
     }
 
     public function update($imagen_logo = null){

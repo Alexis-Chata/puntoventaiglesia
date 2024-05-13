@@ -19,6 +19,11 @@ class AlmacenForm extends Form
     public $email;
     public $codigo_postal;
 
+    public function __construct()
+    {
+
+    }
+
     public function set(Almacen $almacen){
         $this->almacen = $almacen;
         $this->nombre = $almacen->nombre;
@@ -42,6 +47,15 @@ class AlmacenForm extends Form
         } else {
             Almacen::create($this->all());
         }
+    }
+
+    public function agregar_descontar_monto_almacen($almacen_id,$monto,$accion)
+    {
+        $almacen = Almacen::find($almacen_id);
+        if ($accion == '+') {$almacen->monto = $almacen->monto + $monto;}
+        elseif($accion == '-'){$almacen->monto = $almacen->monto - $monto;}
+        $almacen->save();
+        return $almacen->monto;
     }
 
 }

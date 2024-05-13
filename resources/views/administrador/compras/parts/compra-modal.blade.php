@@ -99,7 +99,7 @@
                                             <td><input type="date" id="fecha_vencimiento_producto_{{$key}}" class="form-control"  wire:model.live.debounce.500ms='{{$valor_fecha}}' wire:click="actualizar_item_compra('{{$key}}')"></td>
                                             @endif
                                             @php $valor_cantidad = 'comprasform.detalle_compra.'.$key.'.cantidad';@endphp
-                                            <td><input type="number" id="input_cantidad_{{$key}}" class="form-control"  min="1" wire:model.live.debounce.500ms='{{$valor_cantidad}}' wire:click="actualizar_item_compra('{{$key}}')"></td>
+                                            <td><input type="number" id="input_cantidad_{{$key}}" class="form-control"  min="1" wire:model.live.debounce.1000ms='{{$valor_cantidad}}' wire:click="actualizar_item_compra('{{$key}}')"></td>
                                             <td>{{$comprasform->detalle_compra[$key]['descuento']}}</td>
                                             <td>{{$comprasform->detalle_compra[$key]['impuesto']}}</td>
                                             <td>{{number_format($comprasform->detalle_compra[$key]['total_parcial'],2)}}</td>

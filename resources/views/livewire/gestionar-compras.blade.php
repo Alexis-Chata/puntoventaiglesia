@@ -116,9 +116,11 @@
                                                             <i class="fas fa-ellipsis-v"></i>
                                                         </button>
                                                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuAcciones-1">
+                                                        @if ($compra->estado_pago == 1)
                                                         <li>
                                                             <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modalCompra" id="editar-compra-{{ $compra->id }}" wire:click="modal('{{ $compra->id }}')" href="#"><i class="fas fa-edit"></i> Editar Compra</a>
                                                         </li>
+                                                        @endif
                                                         <li>
                                                             <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modalreportepagoscompra" id="consultar-pago-compra-{{ $compra->id }}" wire:click="modal_pago_compra({{$compra->id}})" href="#"><i class="fas fa-pager"></i> Ver Pagos</a>
                                                         </li>

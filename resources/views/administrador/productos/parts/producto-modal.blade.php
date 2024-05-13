@@ -168,6 +168,11 @@
                                 <span class="error text-danger">{{ $message }}</span>
                             @enderror
                         </div>
+                        <div class="col-12 col-sm-4">
+                            <label for="alerta_stock" class="form-label">Ilimitado </label>
+                            <input type="checkbox" id="producto_ilimitado"
+                                wire:model.live="productoForm.ilimitado"> {{$productoForm->ilimitado}}
+                        </div>
                     </div>
                     @if ($productoForm->tipo == 'compuesto')
                     <div class="row my-2">

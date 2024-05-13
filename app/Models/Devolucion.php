@@ -20,4 +20,8 @@ class Devolucion extends Model
     public function almacen(){
         return $this->belongsTo(Almacen::class);
     }
+
+    public function movimientoable(){
+        return $this->morphTo();
+    }
 }

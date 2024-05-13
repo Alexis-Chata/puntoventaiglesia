@@ -46,7 +46,8 @@ class GestionarCompras extends Component
     public $item_cantidad,$item_nombre_producto;
     public function mount(){  $this->configuracion = Configuracion::find(1); }
 
-    public function save_compra(){
+    public function save_compra()
+    {
         $bproveedor = Proveedor::find($this->buscar_proveedor_oculto);
         $this->comprasform->prove =  $bproveedor ? $this->buscar_proveedor_oculto : null;
         if (isset($this->comprasform->compra)) {$this->comprasform->update();}
@@ -132,8 +133,6 @@ class GestionarCompras extends Component
         $this->productoform->actualizar_precio_producto($bproducto,$this->item_precio_producto);
     }
 
-
-
     public function updatedBuscarProductoOculto()
     {
         $bproducto = Producto::where('codigo',$this->buscar_producto_oculto)->first();
@@ -171,11 +170,13 @@ class GestionarCompras extends Component
         }
     }
 
-    public function updatedSelAlmacen(){
+    public function updatedSelAlmacen()
+    {
         $this->comprasform->reset();
     }
 
-    public function eliminar_item_compra($item_id){
+    public function eliminar_item_compra($item_id)
+    {
         $this->comprasform->eliminar_item_compra($item_id);
         $this->comprasform->obtener_datos_compra();
     }
@@ -211,23 +212,27 @@ class GestionarCompras extends Component
         }
     }
 
-    public function guardar_pago(){
+    public function guardar_pago()
+    {
         $this->pagocompraform->store();
         $this->dispatch('cerrar_modal_pago_compra');
     }
 
-    public function updatedPagocompraForm(){
+    public function updatedPagocompraForm()
+    {
         $this->pagocompraform->calcular_campos();
     }
 
-    public function eliminar(Compra $compra){
+    public function eliminar(Compra $compra)
+    {
         $this->comprasform->set($compra);
         $this->comprasform->eliminar_compra();
         $this->comprasform->reset();
         $this->updatedSearch();
     }
 
-    public function eliminar_pago_compra(PagoCompra $pagoCompra){
+    public function eliminar_pago_compra(PagoCompra $pagoCompra)
+    {
         $compra_id = $pagoCompra->compra_id;
         $pagoCompra->delete();
         $this->pagocompraform->actualizar_compra($compra_id);
@@ -254,7 +259,8 @@ class GestionarCompras extends Component
         return $this->comprasform->descargar_reporte_compras_excel($compras);
     }
 
-    public function descargar_reporte_compras_pdf(){
+    public function descargar_reporte_compras_pdf()
+    {
         $compras = Compra::query()->orwhere('id','like',"%".$this->search."%")->whereExists(function ($query)  {
             $query->select()
                   ->from(DB::raw('proveedors'))

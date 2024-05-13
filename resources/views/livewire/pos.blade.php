@@ -83,8 +83,8 @@
                         <div class="col-12 my-1">
                             <select class="form-select" id="compra_almacen" wire:model.live="almacen_id">
                                 <option value="">Elegir</option>
-                                @forelse ($almacens as $almacen)
-                                    <option value="{{ $almacen->id }}">{{ $almacen->nombre }}</option>
+                                @forelse ($cajero->almacensuser as $alm)
+                                    <option value="{{ $alm->almacen->id }}">{{ $alm->almacen->nombre }}</option>
                                 @empty
                                 @endforelse
                             </select>

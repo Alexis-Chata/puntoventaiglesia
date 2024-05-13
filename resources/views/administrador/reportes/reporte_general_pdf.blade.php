@@ -13,7 +13,7 @@
             <table>
                 <tr>
                     <td>
-                        <h1 class="modal-title fs-5" id="modalReporteCajaLabel">Reporte de General</h1><br>
+                        <h1 class="modal-title fs-5" id="modalReporteCajaLabel">Reporte de General @if ($nombre_titulo) - {{$nombre_titulo}} @endif</h1><br>
                     </td>
                     <td><img src="{{asset($configuracion->logo)}}" alt="" width="128px"></td>
                 </tr>

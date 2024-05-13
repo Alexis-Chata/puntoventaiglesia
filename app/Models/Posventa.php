@@ -16,7 +16,13 @@ class Posventa extends Model
         return $this->morphOne('App\Models\MCaja', 'm_cajable');
     }
 
-    public function posventadetalles(){
+    public function posventadetalles()
+    {
         return $this->hasMany(PosventaDetalle::class,'posventa_id');
+    }
+
+    public function movimientos()
+    {
+        return $this->morphToMany('App\Models\Movimiento','movimientoable');
     }
 }
