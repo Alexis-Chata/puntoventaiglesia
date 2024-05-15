@@ -36,3 +36,34 @@
             </tr>
     </tbody>
 </table>
+
+<table class="table table-hover">
+    <thead class="table-light">
+        <tr class="text-center">
+            <th  style="background-color: black;color:white;width:150px;text-align:center;" colspan="6">Devoluciones</th>
+        </tr>
+        <tr class="text-center">
+            <th style="background-color: black;color:white;width:150px;text-align:center;">Fecha Venta</th>
+            <th style="background-color: black;color:white;width:150px;text-align:center;">Fecha Devolución</th>
+            <th style="background-color: black;color:white;width:150px;text-align:center;">Recibo de Venta</th>
+            <th style="background-color: black;color:white;width:150px;text-align:center;">Almacen</th>
+            <th style="background-color: black;color:white;width:150px;text-align:center;">Cliente</th>
+            <th style="background-color: black;color:white;width:150px;text-align:center;">Total a Pagar</th>
+        </tr>
+    </thead>
+    <tbody>
+        @forelse ($lista_ventas as $pventa)
+            @foreach ($pventa->devolucions as $dev)
+                <tr>
+                    <td style="border: solid 1px black;text-align: center;">{{ $pventa->created_at }}</td>
+                    <td style="border: solid 1px black;text-align: center;">{{ $dev->fecha }}</td>
+                    <td style="border: solid 1px black;text-align: center;">{{ "SL_".$pventa->id }}</td>
+                    <td style="border: solid 1px black;text-align: center;">{{ $dev->almacen_name }}</td>
+                    <td style="border: solid 1px black;text-align: center;">{{ $dev->cliente_name }}</td>
+                    <td style="border: solid 1px black;text-align: center;">{{ $dev->monto_pago }}</td>
+                </tr>
+            @endforeach
+        @empty
+        @endforelse
+    </tbody>
+</table>

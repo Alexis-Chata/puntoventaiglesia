@@ -21,6 +21,11 @@ class Posventa extends Model
         return $this->hasMany(PosventaDetalle::class,'posventa_id');
     }
 
+    public function devolucions()
+    {
+        return $this->hasMany(Devolucion::class,'posventa_id');
+    }
+
     public function movimientos()
     {
         return $this->morphToMany('App\Models\Movimiento','movimientoable');

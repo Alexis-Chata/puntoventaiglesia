@@ -26,7 +26,7 @@ class Producto extends Model
         'precio' ,
         'metodo_impuesto',
         'alerta_stock',
-        'ilimitado'
+        'ilimitado',
     ];
 
     public function pcompuestos(){
