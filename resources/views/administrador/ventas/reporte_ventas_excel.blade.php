@@ -52,8 +52,10 @@
         </tr>
     </thead>
     <tbody>
+        @php $total_devoluciones = 0; @endphp
         @forelse ($lista_ventas as $pventa)
             @foreach ($pventa->devolucions as $dev)
+            @php $total_devoluciones = $total_devoluciones+$dev->monto_pago; @endphp
                 <tr>
                     <td style="border: solid 1px black;text-align: center;">{{ $pventa->created_at }}</td>
                     <td style="border: solid 1px black;text-align: center;">{{ $dev->fecha }}</td>
@@ -66,4 +68,22 @@
         @empty
         @endforelse
     </tbody>
+</table>
+
+<table>
+    <tr>
+        <td colspan="2" style="background-color: black;color:white;width:150px;text-align:center;">Resumen de Ventas y devoluciones</td>
+    </tr>
+    <tr>
+        <td style="background-color: black;color:white;width:150px;text-align:center;">Ventas</td>
+        <td style="border: solid 1px black;text-align: center;">{{$configuracion->moneda->simbolo.$lista_ventas->sum('total_pagar')}}</td>
+    </tr>
+    <tr>
+        <td style="background-color: black;color:white;width:150px;text-align:center;">Devoluciones</td>
+        <td style="border: solid 1px black;text-align: center;">{{$configuracion->moneda->simbolo.$total_devoluciones}}</td>
+    </tr>
+    <tr>
+        <td style="background-color: black;color:white;width:150px;text-align:center;">Total</td>
+        <td style="border: solid 1px black;text-align: center;">{{$configuracion->moneda->simbolo.($lista_ventas->sum('total_pagar')-$total_devoluciones)}}</td>
+    </tr>
 </table>
