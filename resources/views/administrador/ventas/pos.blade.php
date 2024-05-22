@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="{{ asset('css/css_bootstrap.min.css') }}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="{{ asset('js/jquery-ui-1.13.1/jquery-ui.min.css') }}">
+    <link href="{{ asset('css/bootstrap-icons.min.css') }}" rel="stylesheet">
     <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
     <script src="{{ asset('js/jquery-ui-1.13.1/jquery-ui.min.js') }}"></script>
@@ -57,21 +58,19 @@
     @livewireScripts
     <script type="text/javascript">
         window.Livewire.on('enviar_to_imprimir', datos_impresion => {
-            imprimir_comprobant_pdf_js(datos_impresion[0][0],datos_impresion[0][1])
+            imprimir_comprobant_pdf_js(datos_impresion[0][1])
         });
 
-        function imprimir_comprobant_pdf_js(nombreImpresora,urlPdf)
+        function imprimir_comprobant_pdf_js(urlPdf)
         {
-            const url = `http://localhost:8888?printer=${nombreImpresora}&url=${urlPdf}&count=1`;
-            alert(url);
-            fetch(url)
-                .then(respuesta => {
-                    // Si la respuesta es OK, entonces todo fue bien
-                    if (respuesta.status === 200) {
-                        alert('correcto');
-                    } else {
-                        ///////
-                    }
+            const pdfUrl = urlPdf;
+            fetch(`http://localhost:3000/print?url=${encodeURIComponent(pdfUrl)}`)
+                .then(response => response.text())
+                .then(result => {
+                    alert(result);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
                 });
         }
     </script>

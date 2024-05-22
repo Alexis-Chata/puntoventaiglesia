@@ -91,8 +91,10 @@
                         </div>
                         <div class="col-12 my-1">
                             <div class="input-group">
-                                <input type="text" class="form-control"  autocomplete="off"
-                                    placeholder="Escribir Impresora" wire:model.live="simpresora">
+                                <select class="form-select" wire:model.live="simpresora">
+                                    <option value="Descargar">Descargar</option>
+                                    <option value="Imprimir">Imprimir</option>
+                                </select>
                                 <div class="input-group-text" >
                                     <i class="bi bi-printer"></i> <span class="text-danger">*</span>
                                 </div>
