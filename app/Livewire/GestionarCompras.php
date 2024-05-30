@@ -225,16 +225,19 @@ class GestionarCompras extends Component
 
     public function eliminar(Compra $compra)
     {
-        $this->comprasform->set($compra);
-        $this->comprasform->eliminar_compra();
-        $this->comprasform->reset();
-        $this->updatedSearch();
+        if ($compra->pagocompras->count() == 0)
+        {
+            $this->comprasform->set($compra);
+            $this->comprasform->eliminar_compra();
+            $this->comprasform->reset();
+            $this->updatedSearch();
+        }
     }
 
     public function eliminar_pago_compra(PagoCompra $pagoCompra)
     {
         $compra_id = $pagoCompra->compra_id;
-        $pagoCompra->delete();
+        $this->pagocompraform->eliminar_pago_compra($pagoCompra);
         $this->pagocompraform->actualizar_compra($compra_id);
     }
 

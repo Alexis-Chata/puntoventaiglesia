@@ -46,14 +46,21 @@ class GastosForm extends Form
         $this->movimientoform = new MovimientoForm();
         $bgasto = Gasto::find($this->gasto->id);
         ##########################
-        $saldo = $this->almacenform->agregar_descontar_monto_almacen($this->almacen_id,$bgasto->monto,'+');
-        $this->movimientoform->agregar_movimiento($this->gasto->id,$this->almacen_id,$this->monto,$saldo,'+','App\Models\Gasto','editar');
-        $btgasto = Tgasto::find($this->tgasto_id);
-        $this->ignorar = $btgasto->ignorar;
-        $this->gasto->update($this->all());
+        if ($bgasto->ignorar == 0)
+        {
+            $saldo = $this->almacenform->agregar_descontar_monto_almacen($this->almacen_id,$bgasto->monto,'+');
+            $this->movimientoform->agregar_movimiento($this->gasto->id,$this->almacen_id,$bgasto->monto,$saldo,'+','App\Models\Gasto','editar');
+        }
+            $btgasto = Tgasto::find($this->tgasto_id);
+            $this->ignorar = $btgasto->ignorar;
+            $this->gasto->update($this->all());
+
         ##########################
-        $saldoa = $this->almacenform->agregar_descontar_monto_almacen($this->almacen_id,$this->monto,'-');
-        $this->movimientoform->agregar_movimiento($this->gasto->id,$this->almacen_id,$this->monto,$saldoa,'-','App\Models\Gasto','editar');
+        if ($this->gasto->ignorar == 0)
+        {
+            $saldoa = $this->almacenform->agregar_descontar_monto_almacen($this->almacen_id,$this->monto,'-');
+            $this->movimientoform->agregar_movimiento($this->gasto->id,$this->almacen_id,$this->monto,$saldoa,'-','App\Models\Gasto','editar');
+        }
     }
 
     public function store()
@@ -75,8 +82,8 @@ class GastosForm extends Form
     public function eliminar_gasto(Gasto $gasto){
         $this->almacenform = new AlmacenForm();
         $this->movimientoform = new MovimientoForm();
-        $saldo = $this->almacenform->agregar_descontar_monto_almacen($gasto->almacen_id,$gasto->monto,'-');
-        $this->movimientoform->agregar_movimiento($gasto->id,$gasto->almacen_id,$gasto->monto,$saldo,'-','App\Models\Gasto','eliminar');
+        $saldo = $this->almacenform->agregar_descontar_monto_almacen($gasto->almacen_id,$gasto->monto,'+');
+        $this->movimientoform->agregar_movimiento($gasto->id,$gasto->almacen_id,$gasto->monto,$saldo,'+','App\Models\Gasto','eliminar');
         $gasto->delete();
     }
 }

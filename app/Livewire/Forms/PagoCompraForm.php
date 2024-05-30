@@ -59,10 +59,10 @@ class PagoCompraForm extends Form
         $bcompra = PagoCompra::find($this->pagocompra->id);
         ##########################
         $saldo = $this->almacenform->agregar_descontar_monto_almacen($bcompra->compra->almacen_id,$bcompra->monto_pago,'+');
-        $this->movimientoform->agregar_movimiento($bcompra->id,$bcompra->compra->almacen_id,$bcompra->monto_pago,$saldo,'+','App\Models\PagoComprar','editar');
+        $this->movimientoform->agregar_movimiento($bcompra->id,$bcompra->compra->almacen_id,$bcompra->monto_pago,$saldo,'+','App\Models\PagoCompra','editar');
         $this->pagocompra->update($this->all());
         $saldoa = $this->almacenform->agregar_descontar_monto_almacen($this->pagocompra->compra->almacen_id,$this->monto_pago,'-');
-        $this->movimientoform->agregar_movimiento($this->pagocompra->id,$this->pagocompra->compra->almacen_id,$this->monto_pago,$saldoa,'-','App\Models\PagoComprar','editar');
+        $this->movimientoform->agregar_movimiento($this->pagocompra->id,$this->pagocompra->compra->almacen_id,$this->monto_pago,$saldoa,'-','App\Models\PagoCompra','editar');
     }
 
     public function store()
@@ -76,7 +76,16 @@ class PagoCompraForm extends Form
         $this->almacenform = new AlmacenForm();
         $this->movimientoform = new MovimientoForm();
         $saldo = $this->almacenform->agregar_descontar_monto_almacen($this->pagocompra->compra->almacen_id,$this->monto_pago,'-');
-        $this->movimientoform->agregar_movimiento($this->pagocompra->id,$this->pagocompra->compra->almacen_id,$this->monto_pago,$saldo,'-','App\Models\Gasto','crear');
+        $this->movimientoform->agregar_movimiento($this->pagocompra->id,$this->pagocompra->compra->almacen_id,$this->monto_pago,$saldo,'-','App\Models\PagoCompra','crear');
+    }
+
+    public function eliminar_pago_compra(PagoCompra $pagocompra)
+    {
+        $this->almacenform = new AlmacenForm();
+        $this->movimientoform = new MovimientoForm();
+        $saldo = $this->almacenform->agregar_descontar_monto_almacen($pagocompra->compra->almacen_id,$pagocompra->monto_pago,'+');
+        $this->movimientoform->agregar_movimiento($pagocompra->id,$pagocompra->compra->almacen_id,$pagocompra->monto_pago,$saldo,'+','App\Models\PagoCompra','Eliminar');
+        $pagocompra->delete();
     }
 
     public function actualizar_compra($compra_id){

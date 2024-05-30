@@ -219,9 +219,9 @@
                                         @endphp
                                         <td><input class="form-control text-center" id="producto_compuesto_codigo_{{$key}}" disabled type="text" wire:model.live='{{$nombre_codigo}}'></td>
                                         <td><input class="form-control" id="producto_compuesto_nombre_{{$key}}" disabled type="text" wire:model.live='{{$nombre_nombre}}'></td>
-                                        <td class="text-center">{{$configuracion->moneda->simbolo}}{{$productoForm->productos_compuesto[$key]['precio']}}</td>
+                                        <td class="text-center">s/.{{$productoForm->productos_compuesto[$key]['precio']}}</td>
                                         <td><input class="form-control text-center" id="producto_compuesto_cantidad_{{$key}}" type="number" step="0.01" wire:model.live.debounce.500ms='{{$nombre_cantidad}}'></td>
-                                        <td class="text-center">{{$configuracion->moneda->simbolo}}{{$productoForm->productos_compuesto[$key]['total']}}</td>
+                                        <td class="text-center">s/.{{$productoForm->productos_compuesto[$key]['total']}}</td>
                                         <td class="text-center">
                                             <button class="btn btn-danger" wire:loading.attr="disabled" id="eliminar_producto_compuesto_{{$key}}" wire:target="eliminar_producto_compuesto('{{$key}}')" wire:click="eliminar_producto_compuesto('{{$key}}')"><i class="fas fa-trash"></i></button>
                                         </td>
