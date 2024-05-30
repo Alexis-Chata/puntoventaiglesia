@@ -105,6 +105,8 @@ class DatabaseSeeder extends Seeder
                     $n_movimiento->accion = 'crear';
                     $n_movimiento->movimientoable_id = $pagocompra->id;
                     $n_movimiento->movimientoable_type = 'App\Models\PagoCompra';
+                    $n_movimiento->created_at = $pagocompra->created_at;
+                    $n_movimiento->updated_at = $pagocompra->updated_at;
                     $n_movimiento->save();
                 }
             }
@@ -147,6 +149,8 @@ class DatabaseSeeder extends Seeder
                     $n_movimiento->accion = 'crear';
                     $n_movimiento->movimientoable_id = $gato->id;
                     $n_movimiento->movimientoable_type = 'App\Models\Gasto';
+                    $n_movimiento->created_at = $gato->created_at;
+                    $n_movimiento->updated_at = $gato->updated_at;
                     $n_movimiento->save();
                 }
             }
@@ -168,6 +172,8 @@ class DatabaseSeeder extends Seeder
                     $n_movimiento->accion = 'crear';
                     $n_movimiento->movimientoable_id = $posventa->id;
                     $n_movimiento->movimientoable_type = 'App\Models\Posventa';
+                    $n_movimiento->created_at = $posventa->created_at;
+                    $n_movimiento->updated_at = $posventa->updated_at;
                     $n_movimiento->save();
                 }
             }
