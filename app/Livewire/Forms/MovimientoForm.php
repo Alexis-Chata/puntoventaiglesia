@@ -31,7 +31,7 @@ class MovimientoForm extends Form
         $n_mov->accion =  $tipo_accion;
         $n_mov->movimientoable_type =  $modelo;
         $n_mov->movimientoable_id =  $gasto_id;
-        $n_mov->almacen = $balmacen->nombre;
+        $n_mov->almacen = $balmacen->id;
         $n_mov->save();
     }
 }
