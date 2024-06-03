@@ -523,7 +523,7 @@ class ComprasForm extends Form
 
         $this->detalle_compra[$item_id]['descuento'] = $this->detalle_compra[$item_id]['cantidad']*$this->detalle_compra[$item_id]['descuento_unitario'];
         $this->detalle_compra[$item_id]['impuesto'] =  number_format(((( str_replace(',','',$this->detalle_compra[$item_id]['costo_unitario'])-$this->detalle_compra[$item_id]['descuento_unitario'])*$this->detalle_compra[$item_id]['cantidad'])*$this->detalle_compra[$item_id]['impuesto_orden']/100),2);
-        $this->detalle_compra[$item_id]['total_parcial'] = str_replace(',','',$this->detalle_compra[$item_id]['costo_unitario'])*$this->detalle_compra[$item_id]['cantidad']+$this->detalle_compra[$item_id]['impuesto'];
+        $this->detalle_compra[$item_id]['total_parcial'] = str_replace(',','',$this->detalle_compra[$item_id]['costo_unitario'])*$this->detalle_compra[$item_id]['cantidad']+str_replace(',','',$this->detalle_compra[$item_id]['impuesto']);
         $this->obtener_datos_compra();
     }
 
