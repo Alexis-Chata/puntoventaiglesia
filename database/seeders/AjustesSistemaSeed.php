@@ -26,7 +26,6 @@ class AjustesSistemaSeed extends Seeder
         $n_configuracion->pie_pagina_factura = 'esto es una prueba';
         $n_configuracion->cotizacion_stock = null;
         $n_configuracion->almacen_id = 1;
-        $n_configuracion->monto = 0;
         $n_configuracion->save();
     }
 }

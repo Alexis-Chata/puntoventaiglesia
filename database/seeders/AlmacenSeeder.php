@@ -20,6 +20,7 @@ class AlmacenSeeder extends Seeder
         $almacen->ciudad = 'ciudad 1';
         $almacen->email = 'email1@gmail.com';
         $almacen->codigo_postal = 'codigo_postal1';
+        $almacen->monto = 0;
         $almacen->save();
     }
 }
