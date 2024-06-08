@@ -73,6 +73,10 @@
                                     @endforeach
                                 </select>
                             </div>
+                            <div class="col-sm-12 col-md-4 col-lg-4">
+                                <label for="tamano_ticket" class="form-label">Tamaño del Ticket <span style="color:red;">*</span></label>
+                                <input type="text" class="form-control" id="tamano_ticket" wire:model='ajustesistemaform.ancho_impresion' placeholder="Tamaño de Ticket">
+                            </div>
                         </div>
                         <div class="row mb-3">
                             <div class="col-sm-12">

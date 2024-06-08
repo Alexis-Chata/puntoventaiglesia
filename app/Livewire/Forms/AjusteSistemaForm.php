@@ -24,6 +24,7 @@ class AjusteSistemaForm extends Form
     public $pie_pagina_factura;
     public $cotizacion_stock;
     public $farmacia;
+    public $ancho_impresion;
     public $almacen_id;
 
     public $rule_ajuste = [
@@ -50,6 +51,7 @@ class AjusteSistemaForm extends Form
         $this->almacen_id = $configuracion->almacen_id;
         $this->descripcion = $configuracion->descripcion;
         $this->descripcion2 = $configuracion->descripcion2;
+        $this->ancho_impresion = $configuracion->ancho_impresion;
     }
 
     public function update($imagen_logo = null){

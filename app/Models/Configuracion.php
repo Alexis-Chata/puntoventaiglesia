@@ -23,7 +23,8 @@ class Configuracion extends Model
         'cotizacion_stock',
         'almacen_id',
         'descripcion',
-        'descripcion2'
+        'descripcion2',
+        'ancho_impresion',
     ];
     use HasFactory;
 
