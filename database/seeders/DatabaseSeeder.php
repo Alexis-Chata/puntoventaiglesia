@@ -27,7 +27,7 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
         // llamar al sembrador de datos en Moneda
-        /*
+
         $this->call(RoleSeeder::class);
         $this->call(MonedaSeeder::class);
         $this->call(AlmacenSeeder::class);
@@ -53,7 +53,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $user->assignRole('Administrador');
-        */
+
         /*
             $detalles = PosventaDetalle::all();
             foreach ($detalles as $key => $det)
@@ -84,12 +84,12 @@ class DatabaseSeeder extends Seeder
                 }
             }
         */
-        $almacen = Almacen::all();
+        /*$almacen = Almacen::all();
         $pagocompras = PagoCompra::where('created_at','>=','2024-05-01 00:00:00')->get();
         $devoluciones = Devolucion::where('created_at','>=','2024-05-01 00:00:00')->get();
         $gastos = Gasto::where('created_at','>=','2024-05-01 00:00:00')->where('ignorar',0)->get();
         $posventas = Posventa::where('created_at','>=','2024-05-01 00:00:00')->get();
-
+        */ /*
         foreach ($pagocompras as $key => $pagocompra) {
             foreach ($almacen as $key => $alm) {
                 if ($alm->id ==  $pagocompra->compra->almacen_id)
@@ -178,5 +178,6 @@ class DatabaseSeeder extends Seeder
                 }
             }
         }
+            */
     }
 }

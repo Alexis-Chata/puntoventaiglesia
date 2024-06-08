@@ -20,7 +20,6 @@ class RoleSeeder extends Seeder
 
         Role::create(['name' => 'Administrador']);
         Role::create(['name' => 'Cajero']);
-
         Permission::create(['name' =>'admin.configuracion.ajustesistema'])->syncRoles(['Administrador']);
         Permission::create(['name' =>'admin.index'])->syncRoles(['Administrador','Cajero']);
         Permission::create(['name' =>'admin.moneda'])->syncRoles(['Administrador']);
