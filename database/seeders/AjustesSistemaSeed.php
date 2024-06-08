@@ -22,6 +22,8 @@ class AjustesSistemaSeed extends Seeder
         $n_configuracion->desarrollador = 'JNetwork';
         $n_configuracion->pie_pagina = 'Esto es una prueba';
         $n_configuracion->direccion = 'Mz C Barranco';
+        $n_configuracion->descripcion = 'descripcion';
+        $n_configuracion->descripcion2 = 'descripcion2';
         $n_configuracion->pagina_factura = null;
         $n_configuracion->pie_pagina_factura = 'esto es una prueba';
         $n_configuracion->cotizacion_stock = null;
