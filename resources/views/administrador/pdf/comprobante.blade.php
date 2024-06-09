@@ -163,10 +163,12 @@
                 <center><b>SL_{{ $posventa->id }}</b></center>
             </td>
         </tr>
+    </table>
+    <table style="width: 100%">
         <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td style="width : 33%;"></td>
             <td>{!! DNS1D::getBarcodeHTML('SL_' . $posventa->id, 'C128') !!}</td>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td style="width : 33%;"></td>
         </tr>
     </table>
 </body>
