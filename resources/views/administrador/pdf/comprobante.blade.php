@@ -154,6 +154,7 @@
             </tr>
         </tbody>
     </table>
+    <center>
     <table style="width: 90%">
         <tr>
             <td style="text-align: center;">
@@ -178,6 +179,6 @@
             <td><center>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</center></td>
         </tr>
     </table>
-
+    </center>
 </body>
 </html>
