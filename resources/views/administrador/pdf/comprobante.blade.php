@@ -135,7 +135,7 @@
         <thead class="table-light">
             <tr>
                 <th scope="col" style="text-align: left;border-bottom: dashed 1px black;">
-                    <b>Pagado Con:</b>
+                    <b>Al:</b>
                 </th>
                 <th scope="col"
                     style="text-align: center;border-bottom: dashed 1px black;"><b>Monto:</b>
