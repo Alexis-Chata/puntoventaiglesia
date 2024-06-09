@@ -134,14 +134,14 @@
     <table class="table">
         <thead class="table-light">
             <tr>
-                <th scope="col" style="text-align: left;border-bottom: dashed 1px black;background-color: #21252885">
+                <th scope="col" style="text-align: left;border-bottom: dashed 1px black;">
                     <b>Pagado Con:</b>
                 </th>
                 <th scope="col"
-                    style="text-align: center;border-bottom: dashed 1px black;background-color: #21252885"><b>Monto:</b>
+                    style="text-align: center;border-bottom: dashed 1px black;"><b>Monto:</b>
                 </th>
                 <th scope="col"
-                    style="text-align: right;border-bottom: dashed 1px black;background-color: #21252885">
+                    style="text-align: right;border-bottom: dashed 1px black;"">
                     <b>Cambiar:</b>
                 </th>
             </tr>
@@ -158,7 +158,7 @@
         <table>
             <tr>
                 <td style="text-align: center;">
-                    <center><b>Gracias Por Su Compra, Vuelva Pronto.</b>
+                    <center><b>Gracias Por Su Compra, Vuelva Pronto.</b></center>
                 </td>
             </tr>
             <tr>
