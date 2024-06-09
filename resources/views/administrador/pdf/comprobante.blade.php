@@ -17,7 +17,7 @@
 </head>
 
 <body>
-    <table>
+    <table style="width: 100%">
         <tr>
             <td><center><img src="{{ asset($configuracion->logo) }}" alt="" srcset="" width="136px;"></center></td>
         </tr>
@@ -25,7 +25,7 @@
             <td style="font-size: 24px;"><center>{{ $configuracion->name }}</center></td>
         </tr>
     </table>
-    <table>
+    <table style="width: 100%">
         <tbody>
             <tr>
                 <td>
@@ -52,9 +52,7 @@
             </tr>
         </tbody>
     </table>
-
-    <br>
-    <table class="table">
+    <table class="table" style="width: 100%">
         <tbody>
             @foreach ($posventa->posventadetalles as $detalle)
                 <tr>
@@ -130,8 +128,7 @@
 
         </tbody>
     </table>
-    <br>
-    <table class="table">
+    <table class="table" style="width: 100%">
         <thead class="table-light">
             <tr>
                 <th scope="col" style="text-align: left;border-bottom: dashed 1px black;">
@@ -155,7 +152,7 @@
         </tbody>
     </table>
 
-    <table style="width: 60%">
+    <table style="width: 100%">
         <tr>
             <td style="text-align: center;">
                 <b>Gracias Por Su Compra, Vuelva Pronto.</b>
@@ -167,16 +164,9 @@
             </td>
         </tr>
         <tr>
-            <td><center>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</center></td>
-        </tr>
-        <tr>
-            <td><center>{!! DNS1D::getBarcodeHTML('SL_' . $posventa->id, 'C128') !!}</center></td>
-        </tr>
-        <tr>
-            <td><center>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</center></td>
-        </tr>
-        <tr>
-            <td><center>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</center></td>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td>{!! DNS1D::getBarcodeHTML('SL_' . $posventa->id, 'C128') !!}</td>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
         </tr>
     </table>
 </body>
