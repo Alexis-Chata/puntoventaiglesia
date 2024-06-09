@@ -141,7 +141,7 @@
                     style="text-align: center;border-bottom: dashed 1px black;"><b>Monto:</b>
                 </th>
                 <th scope="col"
-                    style="text-align: right;border-bottom: dashed 1px black;"">
+                    style="text-align: right;border-bottom: dashed 1px black;">
                     <b>Cambiar:</b>
                 </th>
             </tr>
