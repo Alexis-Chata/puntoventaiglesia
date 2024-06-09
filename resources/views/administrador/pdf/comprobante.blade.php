@@ -166,9 +166,9 @@
     </table>
     <table style="width: 100%">
         <tr>
-            <td style="width : 33%;"></td>
+            <td style="width :16%;"></td>
             <td>{!! DNS1D::getBarcodeHTML('SL_' . $posventa->id, 'C128') !!}</td>
-            <td style="width : 33%;"></td>
+            <td style="width :16%;"></td>
         </tr>
     </table>
 </body>
