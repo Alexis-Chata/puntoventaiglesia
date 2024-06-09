@@ -155,7 +155,7 @@
         </tbody>
     </table>
 
-    <table style="width: 90%">
+    <table style="width: 60%">
         <tr>
             <td style="text-align: center;">
                 <b>Gracias Por Su Compra, Vuelva Pronto.</b>
