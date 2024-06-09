@@ -154,11 +154,11 @@
             </tr>
         </tbody>
     </table>
-    <center>
+
     <table style="width: 90%">
         <tr>
             <td style="text-align: center;">
-                <center><b>Gracias Por Su Compra, Vuelva Pronto.</b></center>
+                <b>Gracias Por Su Compra, Vuelva Pronto.</b>
             </td>
         </tr>
         <tr>
@@ -179,6 +179,5 @@
             <td><center>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</center></td>
         </tr>
     </table>
-    </center>
 </body>
 </html>
