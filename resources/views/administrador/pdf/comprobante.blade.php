@@ -160,13 +160,19 @@
                 <td style="text-align: center;">
                     <center><b>Gracias Por Su Compra, Vuelva Pronto.</b>
                 </td>
+            </tr>
+            <tr>
                 <td style="text-align: center;">
                     <center><b>SL_{{ $posventa->id }}</b></center>
                 </td>
             </tr>
             <tr>
                 <td><center>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</center></td>
+            </tr>
+            <tr>
                 <td><center>{!! DNS1D::getBarcodeHTML('SL_' . $posventa->id, 'C128') !!}</center></td>
+            </tr>
+            <tr>
                 <td><center>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</center></td>
             </tr>
         </table>
