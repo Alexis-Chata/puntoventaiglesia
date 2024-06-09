@@ -155,16 +155,21 @@
         </tbody>
     </table>
     <br>
-    <center>
-        <span style="text-align: center;"><b>Gracias Por Su Compra, Vuelva Pronto.</b></span><br>
-        <span style="text-align: center;"><b>SL_{{ $posventa->id }}</b></span><br>
         <table>
             <tr>
-                <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                <td>{!! DNS1D::getBarcodeHTML('SL_' . $posventa->id, 'C128') !!}</td>
-                <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td style="text-align: center;">
+                    <center><b>Gracias Por Su Compra, Vuelva Pronto.</b>
+                </td>
+                <td style="text-align: center;">
+                    <center><b>SL_{{ $posventa->id }}</b></center>
+                </td>
+            </tr>
+            <tr>
+                <td><center>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</center></td>
+                <td><center>{!! DNS1D::getBarcodeHTML('SL_' . $posventa->id, 'C128') !!}</center></td>
+                <td><center>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</center></td>
             </tr>
         </table>
-    </center>
+
 </body>
 </html>
