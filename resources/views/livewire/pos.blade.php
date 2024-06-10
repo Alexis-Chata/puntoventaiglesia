@@ -12,16 +12,16 @@
                         <div class="row col-auto align-items-center">
                             <div class="col-auto" style="vertical-align: middle;">
                                 @if ($cajero->modo == 1)
-                                <button role="button" class="btn btn-secondary" wire:loading.attr="disabled" wire:target="cambiar_modo_usuario" wire:click='cambiar_modo_usuario'>
+                                <button role="button" class="btn btn-secondary my-1" wire:loading.attr="disabled" wire:target="cambiar_modo_usuario" wire:click='cambiar_modo_usuario'>
                                     <i class="bi bi-laptop" id="modo_laptop" ></i>
                                 </button>
                                 @elseif($cajero->modo == 2)
-                                <button role="button" class="btn btn-secondary" wire:loading.attr="disabled" wire:target="cambiar_modo_usuario"  wire:click='cambiar_modo_usuario'>
+                                <button role="button" class="btn btn-secondary my-1" wire:loading.attr="disabled" wire:target="cambiar_modo_usuario"  wire:click='cambiar_modo_usuario'>
                                     <i class="bi bi-tablet" id="modo_tablet"></i>
                                 </button>
                                 @endif
                             </div>
-                            <div class="col-auto" style="vertical-align: middle;">
+                            <div class="col-auto my-1" style="vertical-align: middle;">
                                 <button role="button" class="btn btn-info" data-bs-toggle="modal"
                                     data-bs-target="#modalReporteCaja"><i class="bi bi-book-fill"></i></button>
                             </div>
@@ -165,45 +165,61 @@
                         </div>
                         <div class="col-12 my-1">
                             <div class="row">
-                                <div class="col-sm-4 col-12">
-                                    <label for="impuesto" class="form-label"><b>Impuesto</b></label>
-                                    <div class="input-group">
-                                        <div class="input-group-text"><i class="bi bi-percent"></i></div>
-                                        <input type="number" class="form-control" min=0 id="impuesto" placeholder="0"
-                                            wire:model.live="impuesto_porcentaje">
-                                    </div>
-                                </div>
-                                <div class="col-sm-4 col-12">
-                                    <label for="descuento" class="form-label"><b>Descuento</b></label>
-                                    <div class="input-group">
-                                        <div class="input-group-text">{{ $configuracion->moneda->simbolo }}</div>
-                                        <input type="number" class="form-control" min=0 id="descuento"
-                                            placeholder="0" wire:model.live="descuento">
-                                    </div>
-                                </div>
-                                <div class="col-sm-4 col-12">
-                                    <label for="envio" class="form-label"><b>Envió</b></label>
-                                    <div class="input-group">
-                                        <div class="input-group-text">{{ $configuracion->moneda->simbolo }} </div>
-                                        <input type="number" class="form-control" min=0 id="envio"
-                                            placeholder="0" wire:model.live="envio">
+                                <div  class="accordion" id="accordionExample">
+                                    <div class="accordion-item">
+                                      <h2 class="accordion-header">
+                                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                          Datos Adicionales
+                                        </button>
+                                      </h2>
+                                      <div wire:ignore.self id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                                        <div class="accordion-body">
+                                            <div class="row">
+                                                <div class="col-sm-4 col-12">
+                                                    <label for="impuesto" class="form-label"><b>Impuesto</b></label>
+                                                    <div class="input-group">
+                                                        <div class="input-group-text"><i class="bi bi-percent"></i></div>
+                                                        <input type="number" class="form-control" min=0 id="impuesto" placeholder="0"
+                                                            wire:model.live="impuesto_porcentaje">
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-4 col-12">
+                                                    <label for="descuento" class="form-label"><b>Descuento</b></label>
+                                                    <div class="input-group">
+                                                        <div class="input-group-text">{{ $configuracion->moneda->simbolo }}</div>
+                                                        <input type="number" class="form-control" min=0 id="descuento"
+                                                            placeholder="0" wire:model.live="descuento">
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-4 col-12">
+                                                    <label for="envio" class="form-label"><b>Envió</b></label>
+                                                    <div class="input-group">
+                                                        <div class="input-group-text">{{ $configuracion->moneda->simbolo }} </div>
+                                                        <input type="number" class="form-control" min=0 id="envio"
+                                                            placeholder="0" wire:model.live="envio">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                      </div>
                                     </div>
                                 </div>
                             </div>
+
                         </div>
                     </div>
                     <div class="row my-2">
-                        <div class="col-12 col-sm-6">
-                            <button class="btn btn-success btn-lg" wire:click="reiniciar">Reiniciar</button>
+                        <div class="col-12 col-sm-6 my-1">
+                            <button class="btn btn-success" wire:click="reiniciar">Reiniciar</button>
                         </div>
-                        <div class="col-12 col-sm-6">
+                        <div class="col-12 col-sm-6 my-1">
                             @if ($cajero->cajas->where('fecha_cierre', false)->count() == 0)
-                                <button type="button" class="btn btn-success btn-lg" data-bs-toggle="modal"
+                                <button type="button" class="btn btn-success" data-bs-toggle="modal"
                                     data-bs-target="#modalCaja">
                                     Aperturar Caja <i class="fas fa-box"></i>
                                 </button>
                             @else
-                                <button @if (count($items) == 0 or $bclienteoculto == false or $bcliente == false) disabled @endif class="btn btn-danger btn-lg"
+                                <button @if (count($items) == 0 or $bclienteoculto == false or $bcliente == false) disabled @endif class="btn btn-danger"
                                     data-bs-toggle="modal" data-bs-target="#agregarPagoPosModal">Pagar Ahora</button>
                             @endif
                         </div>
