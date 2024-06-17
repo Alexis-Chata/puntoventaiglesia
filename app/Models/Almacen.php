@@ -9,5 +9,5 @@ class Almacen extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['nombre', 'telefono', 'pais', 'ciudad', 'email', 'codigo_postal',];
+    protected $fillable = ['nombre','telefono','pais','ciudad','email', 'codigo_postal','monto'];
 }
