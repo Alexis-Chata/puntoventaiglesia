@@ -18,6 +18,7 @@ class Almacen2Form extends Form
     public $ciudad;
     public $email;
     public $codigo_postal;
+    public $monto = 0;
 
     public function set(Almacen $almacen){
         $this->almacen = $almacen;
