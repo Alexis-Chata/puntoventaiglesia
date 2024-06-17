@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Livewire\Forms\Almacen2Form;
 use App\Livewire\Forms\AlmacenForm;
 use App\Models\Almacen;
 use App\Models\Configuracion;
@@ -12,7 +13,7 @@ class GestionarAlmacen extends Component
 {
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
-    public AlmacenForm $almacenForm;
+    public Almacen2Form $almacenForm;
     public $configuracion;
     public $titlemodal = 'Añadir Almacen';
     public $search = '';
