@@ -734,7 +734,7 @@ class Pos extends Component
                     ->whereColumn('producto_almacens.producto_id', 'productos.id')
                     ->where('producto_almacens.almacen_id', $this->seleccionar_almacen)
                     ->where('productos.designacion', 'like', '%' . $this->buscar_producto . '%');
-            });
+            })->where('estado',true);
 
         $productos->when($this->categoria_id <> '', function ($q) {
             return $q->whereExists(function ($query) {

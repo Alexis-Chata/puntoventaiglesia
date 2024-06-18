@@ -27,13 +27,21 @@ class GestionarAlmacenStock extends Component
     public $configuracion;
     public $productos_almacen_export;
 
+    public function cambiar_estado(ProductoAlmacen $producto_almacen)
+    {
+        if ($producto_almacen->estado) {$producto_almacen->estado = false;}
+        else{$producto_almacen->estado = true;}
+        $producto_almacen->save();
+    }
+
     public function mount()
     {
         $this->salmacen = Almacen::find(1) ? Almacen::find(1)->id : null;
         $this->configuracion = Configuracion::find(1);
     }
 
-    public function updatedSearch(){
+    public function updatedSearch()
+    {
         $this->resetPage();
     }
 
