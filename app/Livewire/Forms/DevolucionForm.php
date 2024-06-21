@@ -54,7 +54,7 @@ class DevolucionForm extends Form
         $this->cliente_name = $posventa->cliente_name;
         $this->impuesto_porcentaje = 0;
         $this->impuesto_monto = 0;
-        $this->descuento = 0;
+        $this->descuento = $posventa->descuento;
         $this->envio = 0;
         $this->total_pagar = 0;
         $this->cantidad_recibida =0;

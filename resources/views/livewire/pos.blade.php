@@ -283,9 +283,15 @@
                                                     <span class="badge text-bg-warning">
                                                         {{ $configuracion->moneda->simbolo . number_format($product->producto->precio, 2) }}
                                                     </span>
+                                                    @if ($product->producto->ilimitado == 0)
                                                     <span class="badge text-bg-info">
                                                         {{ $product->producto->cunidad->name_cor . ' ' . $product->stock }}
                                                     </span>
+                                                    @elseif($product->producto->ilimitado == 1)
+                                                        <span class="badge text-bg-success">
+                                                        Ilimitado
+                                                        </span>
+                                                    @endif
                                                 </div>
                                             </div>
                                         </div>
